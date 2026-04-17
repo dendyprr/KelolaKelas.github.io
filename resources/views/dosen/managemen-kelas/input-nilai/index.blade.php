@@ -21,7 +21,7 @@
         </h1>
     </div>
 
-    <form action="{{route('input-nilai-proccess', $kelas->id)}}" method="POST">
+    <form action="{{route('rekap-nilai-proccess', $kelas->id)}}" method="POST">
         @csrf
         <div class="card shadow mb-4 border-0"> <div class="card-header py-3 d-flex flex-row align-items-center justify-content-between bg-white">
                 <h6 class="m-0 font-weight-bold text-primary">Daftar Mahasiswa & Komponen Nilai</h6>

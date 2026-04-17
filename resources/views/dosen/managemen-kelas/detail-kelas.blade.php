@@ -110,7 +110,7 @@
                             <i class="fas fa-file-invoice fa-3x text-warning mb-3"></i>
                             <h5 class="font-weight-bold text-gray-800">Rekap Nilai</h5>
                             <p class="small text-muted px-3">Lihat dan olah akumulasi nilai tugas, UTS, hingga UAS mahasiswa.</p>
-                            <a href="{{route('input-nilai-index', $data->id)}}" class="btn btn-warning btn-sm px-4 shadow-sm font-weight-bold text-white">Lihat Nilai</a>
+                            <a href="{{route('rekap-nilai-index', $data->id)}}" class="btn btn-warning btn-sm px-4 shadow-sm font-weight-bold text-white">Lihat Nilai</a>
                         </div>
                     </div>
                 </div>
