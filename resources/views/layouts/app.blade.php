@@ -154,6 +154,19 @@
             $(window).resize(function() {
                 checkMobileSidebar();
             });
+
+           // Pastikan class 'toggled' dibuang jika di Desktop
+            if ($(window).width() > 768) {
+            
+                $("#accordionSidebar").removeClass("toggled");
+            }
+
+            // Mencegah menu collapse otomatis saat scroll
+            $(window).off('scroll'); 
+
+            // Jika Mas menggunakan fitur 'collapse' di menu sidebar, 
+            // pastikan menu yang sedang aktif tetap terbuka
+            $('.nav-item.active .collapse').addClass('show');
         });
     </script>
 
@@ -217,14 +230,34 @@
         }
 
         //sidebar tidak tertutup jika di buka //
+        /* Memastikan sidebar tetap lebar dan tidak menciut saat scroll */
+        #accordionSidebar {
+            position: sticky !important;
+            top: 0;
+            height: 100vh;
+            overflow-y: auto;
+            z-index: 1020;
+            transition: none !important; /* Menghilangkan efek animasi yang kadang memicu bug */
+        }
+
+        /* Force lebar sidebar agar tidak berubah jadi kecil otomatis */
+        #accordionSidebar:not(.toggled) {
+            width: 6.5rem !important;
+        }
+
         @media (min-width: 768px) {
-            #accordionSidebar {
-                position: sticky !important;
-                top: 0;
-                height: 100vh;
-                overflow-y: auto;
-                z-index: 1020;
+            #accordionSidebar:not(.toggled) {
+                width: 14rem !important; /* Lebar standar sidebar SB Admin 2 */
             }
+        }
+
+        /* Rapikan scrollbar sidebar agar tidak mengganggu pemandangan */
+        #accordionSidebar::-webkit-scrollbar {
+            width: 4px;
+        }
+        #accordionSidebar::-webkit-scrollbar-thumb {
+            background: rgba(255,255,255,0.1);
+            border-radius: 10px;
         }
     </style>
 
