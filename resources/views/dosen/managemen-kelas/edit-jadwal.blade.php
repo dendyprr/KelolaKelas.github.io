@@ -24,7 +24,8 @@
                 <div class="card-body">
                     <h5 class="font-weight-bold text-info"><i class="fas fa-info-circle mr-2"></i>Mode Ubah</h5>
                     <p class="small text-muted">
-                        Anda sedang mengubah data kelas <strong>{{ $data->nama_matakuliah }}</strong>. Pastikan semua perubahan sudah sesuai sebelum menekan tombol update.
+                        Anda sedang mengubah data kelas <strong>{{ $data->nama_matakuliah }}</strong>. Pastikan semua perubahan sudah sesuai sebelum menekan tombol update. <br>
+                        <strong class="text-danger">* Menandakan wajib di isi</strong>
                     </p>
                 </div>
             </div>

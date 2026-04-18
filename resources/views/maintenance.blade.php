@@ -6,6 +6,10 @@
             <i class="fas fa-fw fa-tachometer-alt"></i>
         @elseif(Route::is('jadwal-ngajar')) 
             <i class="fas fa-fw fa-calendar-check text-primary"></i>
+        @elseif(Route::is('auth-dosen-profile'))
+            <i class="fas fa-user fa-sm fa-fw mr-2 text-primary"></i> 
+        @elseif(Route::is('auth-dosen-settings'))
+            <i class="fas fa-cogs fa-sm fa-fw mr-2 text-primary"></i>
         @elseif(Route::is('tugass-materi'))
             <i class="fas fa-fw fa-book-open text-primary"></i>
         @elseif(Route::is('laporan-presensi'))

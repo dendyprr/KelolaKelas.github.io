@@ -110,16 +110,15 @@
                         </li>
                     </ul>
                 </div>
-            </div>
-            
+            </div>       
             <div class="card-body">
                 <div class="tab-content" id="pills-tabContent">
                     <div class="tab-pane fade show active" id="hari-ini" role="tabpanel">
                         <div class="table-responsive">
-                            <table class="table table-hover border-bottom text-center">
+                            <table class="table table-hover border-bottom text-center m-0">
                                 <thead class="bg-light">
                                     <tr class="text-muted small text-uppercase">
-                                        <th>No</th>
+                                        <th width="50">No</th>
                                         <th style="width: 25%">Jam</th>
                                         <th>Mata Kuliah</th>
                                         <th>Semester</th>
@@ -129,7 +128,7 @@
                                 </thead>
                                 <tbody>
                                     @forelse($pertemuanHariIni as $p)
-                                    <tr class="text-center">
+                                    <tr>
                                         <td class="align-middle">
                                             <span class="badge badge-light border">{{ $loop->iteration }}</span>
                                         </td>
@@ -140,9 +139,7 @@
                                         </td>
                                         <td class="align-middle">
                                             <div class="text-dark font-weight-bold">{{ $p->kelas->nama_matakuliah ?? 'N/A' }}</div>
-                                            <span class="badge badge-secondary-soft text-secondary" style="font-size: 10px; background-color: #f8f9fc;">
-                                                PERTEMUAN KE-{{ $p->pertemuan_ke }}
-                                            </span>
+                                            <small class="text-muted text-uppercase">PERTEMUAN KE-{{ $p->pertemuan_ke }}</small>
                                         </td>
                                         <td class="align-middle">
                                             <span class="badge badge-light border">{{ $p->kelas->semester ?? '-' }}</span>
@@ -156,6 +153,7 @@
                                                 $jamMulai = $p->kelas->jam_mulai;
                                                 $jamSelesai = $p->kelas->jam_selesai;
                                             @endphp
+                                            
                                             @if($sekarang > $jamSelesai)
                                                 <span class="badge badge-success text-white px-3">Selesai</span>
                                             @elseif($sekarang >= $jamMulai && $sekarang <= $jamSelesai)
@@ -166,14 +164,12 @@
                                         </td>
                                     </tr>
                                     @empty
-                                        <tr>
-                                            {{-- Ubah colspan menjadi 6 agar sesuai dengan jumlah kolom di header --}}
-                                            <td colspan="6" class="text-center py-5 text-muted">
-                                                {{-- Ikon otomatis ke tengah karena class text-center pada <td> --}}
-                                                <i class="fas fa-calendar-check fa-3x mb-3 d-inline-block"></i>
-                                                <p class="mb-0">Tidak ada jadwal pertemuan untuk besok.</p>
-                                            </td>
-                                        </tr>
+                                    <tr>
+                                        <td colspan="6" class="text-center py-5 text-muted">
+                                            <i class="fas fa-calendar-times fa-3x mb-3 d-inline-block"></i>
+                                            <p class="mb-0 font-weight-bold">Tidak ada jadwal pertemuan untuk hari ini.</p>
+                                        </td>
+                                    </tr>
                                     @endforelse
                                 </tbody>
                             </table>

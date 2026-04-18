@@ -13,7 +13,8 @@
                 <div class="card-body">
                     <h5 class="font-weight-bold text-info"><i class="fas fa-info-circle mr-2"></i>Informasi</h5>
                     <p class="small text-muted">
-                        Pastikan <strong>Kode Kelas</strong> unik dan belum digunakan oleh kelas lain. Data yang Anda simpan akan otomatis terhubung dengan akun Anda sebagai Dosen Pengampu.
+                        Pastikan <strong>Kode Kelas</strong> unik dan belum digunakan oleh kelas lain. Data yang Anda simpan akan otomatis terhubung dengan akun Anda sebagai Dosen Pengampu. <br>
+                        <strong class="text-danger">* Menandakan wajib di isi</strong>
                     </p>
                 </div>
             </div>

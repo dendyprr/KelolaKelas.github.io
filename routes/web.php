@@ -2,6 +2,7 @@
 
 // use App\Http\Controllers\DashboardController;
 use App\Http\Controllers\dosen\AnggotaGroupController;
+use App\Http\Controllers\dosen\AutDosenController;
 use App\Http\Controllers\dosen\DashboardController;
 use App\Http\Controllers\dosen\InputNilaiController;
 use App\Http\Controllers\dosen\JadwalNgajarController;
@@ -25,6 +26,11 @@ Route::get('/home', [MasterController::class, 'index'])->name('home');
 
     Route::prefix('dashboard')->group(function () {
         Route::get('/', [DashboardController::class, 'index'])->name('dashboard');
+    });
+
+    Route::prefix('auth-dosen')->group(function () {
+        Route::get('/profile', [AutDosenController::class, 'index'])->name('auth-dosen-profile');
+        Route::get('/settings', [AutDosenController::class, 'settingsIndex'])->name('auth-dosen-settings');
     });
     
     Route::prefix('pengumuman')->group(function () {

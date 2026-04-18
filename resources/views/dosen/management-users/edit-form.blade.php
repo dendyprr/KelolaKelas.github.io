@@ -4,13 +4,24 @@
         <div class="modal-content border-0 shadow-lg">
             <div class="modal-header bg-success text-white">
                 <h5 class="modal-title font-weight-bold" id="modalEditLabel{{ $item->id }}">
-                    <i class="fas fa-edit mr-2"></i> Edit Data: {{ $item->nama }}
+                    <i class="fas fa-edit mr-2"></i> Edit Data User
                 </h5>
                 <button class="close text-white" type="button" data-dismiss="modal" aria-label="Close">
                     <span aria-hidden="true">×</span>
                 </button>
             </div>
-            
+
+            <div class="modal-body">
+                <div class="alert alert-light border-left-info shadow-sm small">
+                    <div class="d-flex align-items-center">
+                        <i class="fas fa-info-circle text-info fa-2x mr-3"></i>
+                        <div>
+                            <span class="text-dark font-weight-bold">Panduan Pengisian:</span><br>
+                            Pastikan seluruh data profil sudah sesuai. Kolom dengan tanda <span class="text-danger font-weight-bold">*</span> wajib diisi.
+                        </div>
+                    </div>
+                </div>
+            </div>   
             <form action="{{ route('manajement-user-edit-user', $item->id) }}" method="POST" autocomplete="off">
                 @csrf
                 @method('PUT')

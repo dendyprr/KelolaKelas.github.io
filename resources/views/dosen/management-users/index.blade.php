@@ -162,6 +162,12 @@
                 <form action="{{route('manajement-user-proccess')}}" method="POST" autocomplete="off">
                     @csrf
                     <div class="modal-body text-dark">
+                        <div class="alert alert-info small">
+                            <div>
+                                <span class="text-dark font-weight"><i class="fas fa-info-circle mr-1"> Panduan Pengisian:</i> </span><br>
+                                Pastikan seluruh data profil sudah sesuai. Kolom dengan tanda <span class="text-danger font-weight-bold">*</span> wajib diisi.
+                            </div>
+                        </div>
                         <div class="row">
                             <div class="col-md-6 mb-3">
                                 <div class="form-group small font-weight-bold">

@@ -137,6 +137,26 @@
         </script>
     @endif
 
+    <script>
+        $(document).ready(function() {
+            // Fungsi untuk mengecek lebar layar
+            function checkMobileSidebar() {
+                if ($(window).width() < 768) {
+                    // Tambahkan class 'toggled' jika di layar mobile (< 768px)
+                    $("#accordionSidebar").addClass("toggled");
+                }
+            }
+
+            // Jalankan saat halaman pertama kali di-load
+            checkMobileSidebar();
+
+            // Opsional: Jalankan juga saat layar di-resize
+            $(window).resize(function() {
+                checkMobileSidebar();
+            });
+        });
+    </script>
+
     <style>
         /* Container animasi disesuaikan agar pas di dalam Card */
         .animation-container {
@@ -194,6 +214,17 @@
         @keyframes float {
             0%, 100% { transform: translateY(0px); }
             50% { transform: translateY(-15px); }
+        }
+
+        //sidebar tidak tertutup jika di buka //
+        @media (min-width: 768px) {
+            #accordionSidebar {
+                position: sticky !important;
+                top: 0;
+                height: 100vh;
+                overflow-y: auto;
+                z-index: 1020;
+            }
         }
     </style>
 
