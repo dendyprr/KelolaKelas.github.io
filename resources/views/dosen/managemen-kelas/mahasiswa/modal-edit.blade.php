@@ -12,7 +12,7 @@
             </div>
             
             {{-- Sesuaikan route update kamu di sini --}}
-            <form action="{{route('anggota-group-edit-mahasiswa', $mhs->id)}}" method="POST">
+            <form action="{{route('anggota-group-edit-mahasiswa', $mhs->id)}}" method="POST" autocomplete="off">
                 @csrf
                 @method('PUT')
                 

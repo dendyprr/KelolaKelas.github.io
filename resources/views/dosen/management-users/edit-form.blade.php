@@ -11,7 +11,7 @@
                 </button>
             </div>
             
-            <form action="{{ route('manajement-user-edit-user', $item->id) }}" method="POST">
+            <form action="{{ route('manajement-user-edit-user', $item->id) }}" method="POST" autocomplete="off">
                 @csrf
                 @method('PUT')
                 

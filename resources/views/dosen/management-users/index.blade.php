@@ -14,7 +14,7 @@
             </ol>
         </nav>
         <div class="card-header py-3">
-            <form action="{{ url()->current() }}" method="GET" class="mb-3">
+            <form action="{{ url()->current() }}" method="GET" class="mb-3" autocomplete="off">
                 <div class="row">
                     <div class="col-md-4 mb-3">
                         <label for="filter-cari" class="form-label small font-weight-bold">Nama / NIM / Email</label>
@@ -159,7 +159,7 @@
                     <h5 class="modal-title font-weight-bold"><i class="fas fa-user-plus mr-2"></i> Tambah User Baru</h5>
                     <button class="close text-white" type="button" data-dismiss="modal"><span>×</span></button>
                 </div>
-                <form action="{{route('manajement-user-proccess')}}" method="POST">
+                <form action="{{route('manajement-user-proccess')}}" method="POST" autocomplete="off">
                     @csrf
                     <div class="modal-body text-dark">
                         <div class="row">

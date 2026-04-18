@@ -14,7 +14,7 @@
                     <h6 class="m-0 font-weight-bold text-primary">Formulir Data Kelas</h6>
                 </div>
                 <div class="card-body">
-                    <form action="{{route('tambah-manajement-kelas')}}" method="POST" class="p-3">
+                    <form action="{{route('tambah-manajement-kelas')}}" method="POST" class="p-3" autocomplete="off">
                         @csrf
                         <div class="row mb-4">
                             <div class="col-md-6">

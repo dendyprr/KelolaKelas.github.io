@@ -7,7 +7,7 @@
         </h1>
     </div>
 
-    <form action="{{ route('pertemuan-presensi-update', $pertemuan->id) }}" method="POST">
+    <form action="{{ route('pertemuan-presensi-update', $pertemuan->id) }}" method="POST" autocomplete="off">
         @csrf
         @method('PUT')
 

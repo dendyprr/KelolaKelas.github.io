@@ -19,7 +19,7 @@
             <h6 class="m-0 font-weight-bold text-primary mb-3">Filter Data Mahasiswa</h6>
             
             {{-- FORM FILTER GAYA MAS DENDY --}}
-            <form action="{{ url()->current() }}" method="GET" class="mb-3">
+            <form action="{{ url()->current() }}" method="GET" class="mb-3" autocomplete="off">
                 <div class="row">
                     <div class="col-md-4 mb-3">
                         <label for="filter-cari" class="form-label small font-weight-bold">Nama / NIM / Email</label>
@@ -172,7 +172,7 @@
                 </button>
             </div>
             
-            <form action="{{route('anggota-group-proccess', $data->id)}}" method="POST">
+            <form action="{{route('anggota-group-proccess', $data->id)}}" method="POST" autocomplete="off">
                 @csrf
                 <input type="hidden" name="kelas_id" value="{{ $data->id }}">
                 <div class="modal-body">
