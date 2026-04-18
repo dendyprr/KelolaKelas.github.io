@@ -13,7 +13,7 @@
             </a>
             {{ $title }}
         </h1>
-        <div class="badge text-white bg-{{ $currentColor }} px-3 py-2 shadow-sm">
+        <div class="badge text-white bg-{{ $currentColor }} px-3 py-2 shadow-sm mt-3">
             <i class="fas fa-calendar-alt mr-1"></i> TA {{ $data->tahun_ajaran }}
         </div>
     </div>

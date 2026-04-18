@@ -123,7 +123,7 @@
                                 </td>
 
                                 <td>{{ $item->phone ?? '-' }}</td>
-                                <td class="text-center">
+                                <td>
                                     <div class="d-flex justify-content-center">
                                         <button class="btn btn-sm btn-success shadow-sm mr-2" 
                                                 data-toggle="modal" 
@@ -280,6 +280,9 @@
                                         </div>
                                         <input type="password" name="password" class="form-control form-control-sm @error('password') is-invalid @enderror" placeholder="******" required>
                                     </div>
+                                    <small class="text-muted text-italic">
+                                        <span class="text-danger"> *Password Minimal Harus 5 Karakter</span>
+                                    </small>
                                     @error('password')
                                         <small class="text-danger font-weight-bold">{{ $message }}</small>
                                     @enderror

@@ -7,8 +7,18 @@
         </h1>
     </div>
 
-    <div class="row">
-        <div class="col-lg-8">
+    <div class="row d-flex flex-column flex-lg-row">
+        <div class="col-lg-4 order-1 order-lg-2">
+            <div class="card shadow mb-4 border-left-info">
+                <div class="card-body">
+                    <h5 class="font-weight-bold text-info"><i class="fas fa-info-circle mr-2"></i>Informasi</h5>
+                    <p class="small text-muted">
+                        Pastikan <strong>Kode Kelas</strong> unik dan belum digunakan oleh kelas lain. Data yang Anda simpan akan otomatis terhubung dengan akun Anda sebagai Dosen Pengampu.
+                    </p>
+                </div>
+            </div>
+        </div>
+        <div class="col-lg-8 order-2 order-lg-1">
             <div class="card shadow mb-4">
                 <div class="card-header py-3">
                     <h6 class="m-0 font-weight-bold text-primary">Formulir Data Kelas</h6>
@@ -16,8 +26,8 @@
                 <div class="card-body">
                     <form action="{{route('tambah-manajement-kelas')}}" method="POST" class="p-3" autocomplete="off">
                         @csrf
-                        <div class="row mb-4">
-                            <div class="col-md-6">
+                        <div class="row">
+                            <div class="col-12 col-md-6 mb-3 mb-md-3">
                                 <label class="font-weight-bold text-dark">Kode Kelas</label>
                                 <div class="input-group shadow-sm">
                                     <div class="input-group-prepend">
@@ -26,7 +36,7 @@
                                     <input type="text" name="kode_kelas" class="form-control" placeholder="INF-A1">
                                 </div>
                             </div>
-                            <div class="col-md-6">
+                            <div class="col-12 col-md-6 mb-3 mb-md-3">
                                 <label class="font-weight-bold text-dark"><span class="text-danger">*</span> Nama Mata Kuliah</label>
                                 <div class="input-group shadow-sm">
                                     <div class="input-group-prepend">
@@ -42,8 +52,8 @@
                             </div>
                         </div>
 
-                        <div class="row mb-4">
-                            <div class="col-md-6">
+                        <div class="row">
+                            <div class="col-12 col-md-6 mb-3 mb-md-3">
                                 <label class="font-weight-bold text-dark"><span class="text-danger">*</span> Periode</label>
                                 <div class="input-group shadow-sm">
                                     <div class="input-group-prepend">
@@ -61,7 +71,7 @@
                                     </small>
                                 @enderror
                             </div>
-                            <div class="col-md-6">
+                            <div class="col-12 col-md-6 mb-3 mb-md-3">
                                 <label class="font-weight-bold text-dark"><span class="text-danger">*</span> Tahun Ajaran</label>
                                 <div class="input-group shadow-sm">
                                     <div class="input-group-prepend">
@@ -77,8 +87,8 @@
                             </div>
                         </div>
 
-                        <div class="row mb-4">
-                            <div class="col-md-6">
+                        <div class="row">
+                            <div class="col-12 col-md-6 mb-3 mb-md-3">
                                 <label class="font-weight-bold text-dark"><span class="text-danger">*</span> Semester</label>
                                 <div class="input-group shadow-sm">
                                     <div class="input-group-prepend">
@@ -92,7 +102,7 @@
                                     </small>
                                 @enderror
                             </div>
-                            <div class="col-md-6">
+                            <div class="col-12 col-md-6 mb-3 mb-md-3">
                                 <label class="font-weight-bold text-dark"> Jumlah SKS</label>
                                 <div class="input-group shadow-sm">
                                     <div class="input-group-prepend">
@@ -103,8 +113,8 @@
                             </div>
                         </div>
 
-                        <div class="row mb-4">
-                            <div class="col-md-6">
+                        <div class="row">
+                            <div class="col-12 col-md-6 mb-3 mb-md-3">
                                 <label class="font-weight-bold text-dark"><span class="text-danger">*</span> Hari</label>
                                 <div class="input-group shadow-sm">
                                     <div class="input-group-prepend">
@@ -122,7 +132,7 @@
                                     </small>
                                 @enderror
                             </div>
-                            <div class="col-md-6">
+                            <div class="col-12 col-md-6 mb-3 mb-md-3">
                                 <label class="font-weight-bold text-dark">Ruangan</label>
                                 <div class="input-group shadow-sm">
                                     <div class="input-group-prepend">
@@ -133,8 +143,8 @@
                             </div>
                         </div>
 
-                        <div class="row mb-4">
-                            <div class="col-md-6">
+                        <div class="row">
+                            <div class="col-12 col-md-6 mb-3 mb-md-3">
                                 <label class="font-weight-bold text-dark"><span class="text-danger">*</span> Jam Mulai</label>
                                 <div class="input-group shadow-sm">
                                     <div class="input-group-prepend">
@@ -148,7 +158,7 @@
                                     </small>
                                 @enderror
                             </div>
-                            <div class="col-md-6">
+                            <div class="col-12 col-md-6 mb-3 mb-md-3">
                                 <label class="font-weight-bold text-dark"><span class="text-danger">*</span> Jam Selesai</label>
                                 <div class="input-group shadow-sm">
                                     <div class="input-group-prepend">
@@ -167,29 +177,18 @@
                         <hr class="my-4">
 
                         <div class="row">
-                            <div class="col-md-6 mb-2">
+                            <div class="col-md-6 mb-3">
                                 <a href="{{route('manajement-kelas')}}" class="btn btn-secondary btn-block shadow-sm">
                                     Kembali
                                 </a>
                             </div>
-                            <div class="col-md-6 mb-2">
+                            <div class="col-md-6 mb-3">
                                 <button type="submit" class="btn btn-primary btn-block shadow-sm">
                                     <i class="fas fa-save mr-2"></i> Simpan Jadwal Kelas
                                 </button>
                             </div>
                         </div>
                     </form>
-                </div>
-            </div>
-        </div>
-
-        <div class="col-lg-4">
-            <div class="card shadow mb-4 border-left-info">
-                <div class="card-body">
-                    <h5 class="font-weight-bold text-info"><i class="fas fa-info-circle mr-2"></i>Informasi</h5>
-                    <p class="small text-muted">
-                        Pastikan <strong>Kode Kelas</strong> unik dan belum digunakan oleh kelas lain. Data yang Anda simpan akan otomatis terhubung dengan akun Anda sebagai Dosen Pengampu.
-                    </p>
                 </div>
             </div>
         </div>

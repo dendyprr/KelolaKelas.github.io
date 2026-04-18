@@ -33,7 +33,7 @@ class ManagementUserController extends Controller
             'phone'         => 'required',
             'jenis_kelamin' => 'required',
             'role_id'       => 'required',
-            'password'      => 'required|min:8', // Minimal 8 karakter
+            'password'      => 'required|min:5',
         ],
         [
             'nama.required'          => 'Nama lengkap tidak boleh kosong',

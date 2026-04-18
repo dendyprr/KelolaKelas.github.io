@@ -3,11 +3,11 @@
 @section('content')
    <div class="d-sm-flex align-items-center justify-content-between mb-4">
         <h1 class="h3 mb-0 text-gray-800"> 
-            <i class="fas fa-fw fa-calendar-alt mr-2 text-primary"></i>
+            <i class="fas fa-fw fa-chalkboard-teacher text-primary"></i>
             {{ $title }} 
         </h1>
 
-        <a href="{{ route('add-manajement-kelas') }}" class="btn btn-sm btn-primary shadow-sm font-weight-bold">
+        <a href="{{ route('add-manajement-kelas') }}" class="btn btn-sm btn-primary shadow-sm font-weight-bold mt-3">
             <i class="fas fa-plus fa-sm text-white-50 mr-1"></i> 
             Tambah Kelas Baru
         </a>
@@ -39,8 +39,13 @@
                 
                 <div class="col-md-4 mb-2 mb-md-0">
                     <label class="small font-weight-bold">Tahun Ajaran:</label>
-                    <input type="text" name="filter_tahun" class="form-control form-control-sm" 
-                        placeholder="Contoh: 2023/2024" value="{{ $filter_tahun }}">
+                    <select name="filter_tahun" class="form-control form-control-sm">
+                        <option value="">Semua Tahun</option>
+                        <option value="2023" {{ $filter_tahun == '2023' ? 'selected' : '' }}>2023</option>
+                        <option value="2024" {{ $filter_tahun == '2024' ? 'selected' : '' }}>2024</option>
+                        <option value="2025" {{ $filter_tahun == '2025' ? 'selected' : '' }}>2025</option>
+                        <option value="2026" {{ $filter_tahun == '2026' ? 'selected' : '' }}>2026</option>
+                    </select>
                 </div>
 
                 <div class="col-md-4">
@@ -58,7 +63,7 @@
         </div>
     </div>
 
-   <div class="row">
+    <div class="row">
         @php
             $colors = ['primary', 'success', 'info', 'warning', 'danger', 'secondary'];
         @endphp

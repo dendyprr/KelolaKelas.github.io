@@ -9,9 +9,9 @@
 </style>
 
 <div class="container-fluid full-width-container">
-    <div class="px-4">
+    <div>
         <h1 class="h3 mb-4 text-gray-800 font-weight-bold"> 
-            <i class="fas fa-list-ol mr-2 text-primary"></i> Log Pertemuan Kuliah
+            <i class="fas fa-list-ol text-primary"></i> Log Pertemuan Kuliah
         </h1>
     </div>
 
@@ -36,14 +36,22 @@
     </div>
 
     {{-- Action Buttons --}}
-    <div class="px-4 d-flex justify-content-between align-items-center mb-3">
-        <h6 class="m-0 font-weight-bold text-dark text-uppercase"><i class="fas fa-stream mr-1"></i> Daftar Riwayat</h6>
+    <div class="d-flex justify-content-between align-items-center mb-3 flex-wrap">
+        <h6 class="m-0 font-weight-bold text-dark text-uppercase mb-2 mb-md-0">
+            <i class="fas fa-stream mr-1"></i> Daftar Riwayat
+        </h6>
+    
         <div class="d-flex align-items-center" style="gap: 10px;">
-            <a href="{{ route('detail-manajement-kelas', $kelas_id) }}" class="btn btn-sm btn-secondary shadow-sm font-weight-bold px-3">
-                <i class="fas fa-arrow-left mr-1"></i> Kembali
+            <a href="{{ route('detail-manajement-kelas', $kelas_id) }}" 
+            class="btn btn-sm btn-secondary shadow-sm font-weight-bold d-flex align-items-center justify-content-center" 
+            style="width: 145px;">
+                <i class="fas fa-arrow-left mr-2"></i> Kembali
             </a>
-            <button class="btn btn-sm btn-primary shadow-sm font-weight-bold px-3" data-toggle="modal" data-target="#modalTambahPertemuan">
-                <i class="fas fa-plus mr-1"></i> Pertemuan Baru
+            
+            <button class="btn btn-sm btn-primary shadow-sm font-weight-bold d-flex align-items-center justify-content-center" 
+                    data-toggle="modal" data-target="#modalTambahPertemuan" 
+                    style="width: 145px;">
+                <i class="fas fa-plus mr-2"></i> Pertemuan Baru
             </button>
         </div>
     </div>

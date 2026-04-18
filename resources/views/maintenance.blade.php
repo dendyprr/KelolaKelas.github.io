@@ -1,12 +1,11 @@
 @extends('layouts.app')
 
 @section('content')
-<div class="container-fluid">
     <h1 class="h3 mb-4 text-gray-800"> 
         @if(Route::is('dashboard'))
             <i class="fas fa-fw fa-tachometer-alt"></i>
-        @elseif(Route::is('jadwal-ngajar'))
-            <i class="fas fa-fw fa-calendar-alt mr-2 text-primary"></i>
+        @elseif(Route::is('jadwal-ngajar')) 
+            <i class="fas fa-fw fa-calendar-check text-primary"></i>
         @elseif(Route::is('tugass-materi'))
             <i class="fas fa-fw fa-book-open text-primary"></i>
         @elseif(Route::is('laporan-presensi'))
@@ -23,8 +22,8 @@
         {{ $title }} 
     </h1>
 
-    <div class="row justify-content-center">
-        <div class="col-md-12">
+    <div class="row">
+        <div class="col-12">
             <div class="card shadow">
                 <div class="card-body text-center py-5">
                     
@@ -54,5 +53,4 @@
             </div>
         </div>
     </div>
-</div>
 @endsection
