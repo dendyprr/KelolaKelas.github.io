@@ -1,6 +1,7 @@
 <?php
 
 // use App\Http\Controllers\DashboardController;
+use App\Http\Controllers\AuthController;
 use App\Http\Controllers\dosen\AnggotaGroupController;
 use App\Http\Controllers\dosen\AutDosenController;
 use App\Http\Controllers\dosen\DashboardController;
@@ -15,6 +16,7 @@ use App\Http\Controllers\dosen\MateriTugasController;
 use App\Http\Controllers\dosen\MaterTugasController;
 use App\Http\Controllers\dosen\PengumumanController;
 use App\Http\Controllers\dosen\PertemuanPresensiController;
+use App\Http\Controllers\dosen\ProfileController;
 use App\Http\Controllers\dosen\RekapNilaiController;
 use Illuminate\Support\Facades\Route;
 
@@ -22,17 +24,17 @@ Route::get('/', function () {
     return view('welcome');
 });
 
-Route::get('/home', [MasterController::class, 'index'])->name('home');
-
+Route::middleware('cekLogin')->group(function() {
+    
     Route::prefix('dashboard')->group(function () {
         Route::get('/', [DashboardController::class, 'index'])->name('dashboard');
     });
 
-    Route::prefix('auth-dosen')->group(function () {
-        Route::get('/profile', [AutDosenController::class, 'index'])->name('auth-dosen-profile');
-        Route::get('/settings', [AutDosenController::class, 'settingsIndex'])->name('auth-dosen-settings');
+    Route::prefix('profile')->group(function () {
+        Route::get('/profile', [ProfileController::class, 'index'])->name('profile-profile');
+        Route::get('/settings', [ProfileController::class, 'settingsIndex'])->name('profile-settings');
     });
-    
+     
     Route::prefix('pengumuman')->group(function () {
         Route::get('/', [PengumumanController::class, 'index'])->name('pengumuman');
     });
@@ -84,8 +86,14 @@ Route::get('/home', [MasterController::class, 'index'])->name('home');
         Route::delete('/{id}/hapus', [ManagementUserController::class, 'hapus'])->name('manajement-user-hapus-user');
         Route::put('/{id}/update', [ManagementUserController::class, 'editProccess'])->name('manajement-user-edit-user');
     });
+    
+});
 
-
+    Route::prefix('auth')->group(function () {
+        Route::get('/login', [AuthController::class, 'index'])->name('auth-login');
+        Route::get('/login-proccess', [AuthController::class, 'loginProccess'])->name('auth-login-proccess');
+        Route::get('/logout', [AuthController::class, 'logout'])->name('auth-logout');
+    });
 
 Route::get('/jadwal-ngajar', [JadwalNgajarController::class, 'index'])->name('jadwal-ngajar');
 Route::get('/add/jadwal-ngajar', [JadwalNgajarController::class, 'add'])->name('add-jadwal-ngajar');

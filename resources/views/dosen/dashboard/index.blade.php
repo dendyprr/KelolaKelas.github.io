@@ -186,7 +186,7 @@
                                         <th>Mata Kuliah</th>
                                         <th>Semester</th>
                                         <th>Ruang</th>
-                                        <th class="text-center">Keterangan</th>
+                                        <th class="text-center">Status</th>
                                     </tr>
                                 </thead>
                                 <tbody>

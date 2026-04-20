@@ -4,9 +4,8 @@ namespace App\Http\Controllers\dosen;
 
 use Illuminate\Http\Request;
 
-class AutDosenController extends Controller
+class ProfileController extends Controller
 {
-    
     public function index()
     {
         $data = [
@@ -24,5 +23,4 @@ class AutDosenController extends Controller
 
         return view('maintenance', $data);
     }
-
 }
