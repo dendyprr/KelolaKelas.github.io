@@ -19,7 +19,7 @@
 		<div class="container-login100">
 			<div class="wrap-login100">
 				<div class="login100-pic js-tilt" data-tilt>
-					<img src=" {{asset('login-form/login_v1/images/img-01.png')}} " alt="IMG">
+					<img src="{{asset('login-form/login_v1/images/img-01.png')}}" alt="IMG">
 				</div>
 
 				<form action="{{route('auth-login-proccess')}}" class="login100-form validate-form" autocomplete="off">
