@@ -90,15 +90,41 @@
                                     </div>
                                     
                                     {{-- Tombol Hapus (Sampah) --}}
-                                    <form action="{{route('hapus-manajement-kelas', $item->id)}}" method="POST" onsubmit="return confirm('Hapus jadwal {{ $item->nama_matakuliah }}?')">
-                                        @csrf
-                                        @method('DELETE')
-                                        <button type="submit" class="btn btn-sm btn-circle btn-light text-danger shadow-sm">
-                                            <i class="fas fa-trash"></i>
-                                        </button>
-                                    </form>
-                                </div>
+                                    <button type="button" class="btn btn-sm btn-circle btn-light text-danger shadow-sm" data-toggle="modal" data-target="#deleteModal{{ $item->id }}">
+                                        <i class="fas fa-trash"></i>
+                                    </button>
 
+                                    {{-- Modal --}}
+                                    <div class="modal fade" id="deleteModal{{ $item->id }}" tabindex="-1" role="dialog" aria-hidden="true">
+                                        {{-- Margin-top 40px supaya posisi di atas, tidak terlalu ke tengah --}}
+                                        <div class="modal-dialog" role="document" style="margin-top: 40px;">
+                                            <div class="modal-content border-0 shadow">
+                                                <div class="modal-header bg-danger text-white">
+                                                    <h5 class="modal-title">Konfirmasi Hapus Matakuliah</h5>
+                                                    <button type="button" class="close text-white" data-dismiss="modal" aria-label="Close">
+                                                        <span aria-hidden="true">&times;</span>
+                                                    </button>
+                                                </div>
+                                                <div class="modal-body text-start">
+                                                    Apakah Anda yakin ingin **{{ $item->nama_matakuliah }}**? 
+                                                    <br>
+                                                    <small class="text-muted">Data yang sudah dihapus mungkin tidak dapat dikembalikan.</small>
+                                                </div>
+                                                <div class="modal-footer bg-light">
+                                                    <button type="button" class="btn btn-secondary" data-dismiss="modal">Batal</button>
+                                                        
+                                                    {{-- Form Hapus --}}
+                                                    <form action="{{ route('hapus-manajement-kelas', $item->id) }}" method="POST" class="m-0 p-0">
+                                                        @csrf
+                                                        @method('DELETE')
+                                                        <button type="submit" class="btn btn-danger">Ya, Hapus</button>
+                                                    </form>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                                
                                 <div class="h5 mb-1 font-weight-bold text-gray-800">
                                     {{ $item->nama_matakuliah }}
                                 </div>

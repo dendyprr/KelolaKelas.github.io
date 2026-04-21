@@ -80,9 +80,22 @@
                         <li class="nav-item dropdown no-arrow">
                             <a class="nav-link dropdown-toggle" href="#" id="userDropdown" role="button"
                                 data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                                <span class="mr-2 d-none d-lg-inline text-gray-600 small">Douglas McGee</span>
-                                <img class="img-profile rounded-circle"
-                                    src="img/undraw_profile.svg">
+                                
+                                <span class="mr-3 d-none d-lg-inline text-right">
+                                    {{-- Nama User --}}
+                                    <div class="text-gray-600 small font-weight-bold mb-0">{{ Auth::user()->nama }}</div>
+                                    
+                                    {{-- Label/Badge Role --}}
+                                    @if(Auth::user()->role_id == 1)
+                                        <span class="badge badge-danger" style="font-size: 0.6rem;">Admin</span>
+                                    @elseif(Auth::user()->role_id == 2)
+                                        <span class="badge badge-success" style="font-size: 0.6rem;">Dosen</span>
+                                    @else
+                                        <span class="badge badge-primary" style="font-size: 0.6rem;">Mahasiswa</span>
+                                    @endif
+                                </span>
+
+                                <img class="img-profile rounded-circle" src="{{ asset('img/undraw_profile.svg') }}">
                             </a>
                             <!-- Dropdown - User Information -->
                             <div class="dropdown-menu dropdown-menu-right shadow animated--grow-in"

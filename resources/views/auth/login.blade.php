@@ -22,7 +22,7 @@
 					<img src="{{asset('login-form/Login_v1/images/img-01.png')}}" alt="IMG">
 				</div>
 
-				<form action="{{route('auth-login-proccess')}}" class="login100-form validate-form" autocomplete="off">
+				<form action="{{route('auth-login-proccess')}}" method="POST" class="login100-form validate-form" autocomplete="off">
                     @csrf
 					<span class="login100-form-title">
 						Member Login
@@ -34,7 +34,7 @@
 						<span class="symbol-input100">
 							<i class="fa fa-envelope" aria-hidden="true"></i>
 						</span>
-                        @error('nama_matakuliah')
+                        @error('email')
                             <small class="text-danger font-weight-bold">
                                 {{ $message }}
                             </small>
@@ -42,11 +42,16 @@
 					</div>
 
 					<div class="wrap-input100 validate-input" data-validate = "Password is required">
-						<input class="input100" type="password" name="password" placeholder="Password" autocomplete="off">
+						<input class="input100 @error('password') is-invalid @enderror" type="password" name="password" placeholder="Password" autocomplete="off">
 						<span class="focus-input100"></span>
 						<span class="symbol-input100">
 							<i class="fa fa-lock" aria-hidden="true"></i>
 						</span>
+						@error('email')
+                            <small class="text-danger font-weight-bold">
+                                {{ $message }}
+                            </small>
+                        @enderror
 					</div>
 					
 					<div class="container-login100-form-btn">
@@ -66,8 +71,8 @@
 
 					<div class="text-center p-t-136">
 						<a class="txt2" href="#">
-							Create your Account
-							<i class="fa fa-long-arrow-right m-l-5" aria-hidden="true"></i>
+							{{-- Create your Account --}}
+							{{-- <i class="fa fa-long-arrow-right m-l-5" aria-hidden="true"></i> --}}
 						</a>
 					</div>
 				</form>

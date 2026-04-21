@@ -6,6 +6,16 @@
         {{ $title }}
     </h1>
 
+    {{-- Pesan Sukses Setelah Hapus --}}
+    @if(session('success'))
+        <div class="alert alert-success alert-dismissible fade show" role="alert">
+            {{ session('success') }}
+            <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+                <span aria-hidden="true">&times;</span>
+            </button>
+        </div>
+    @endif
+
     <div class="card shadow mb-4">
         {{-- Breadcrumb --}}
         <nav aria-label="breadcrumb" class="bg-primary p-2 rounded-top">
@@ -127,20 +137,45 @@
                                         </button>
 
                                         {{-- FORM HAPUS --}}
-                                        <form action="{{ route('anggota-group-hapus-absen-mahasiswa', $mhs->id) }}" 
-                                            method="POST" 
-                                            onsubmit="return confirm('Apakah Anda yakin?')"
-                                            class="m-0 p-0"> {{-- Paksa margin & padding form nol --}}
-                                            @csrf
-                                            @method('DELETE')
-                                            <button type="submit" 
-                                                    class="btn btn-danger btn-sm shadow-sm d-flex align-items-center justify-content-center" 
-                                                    title="Hapus"
-                                                    style="width: 32px; height: 32px;">
-                                                <i class="fas fa-trash"></i>
-                                            </button>
-                                        </form>
-                                        
+                                        <button type="button" 
+                                                class="btn btn-danger btn-sm shadow-sm d-flex align-items-center justify-content-center" 
+                                                data-toggle="modal" 
+                                                data-target="#modalHapusAbsen{{ $mhs->id }}"
+                                                title="Hapus"
+                                                style="width: 32px; height: 32px;">
+                                            <i class="fas fa-trash"></i>
+                                        </button>
+
+                                        {{-- Struktur Modal --}}
+                                         <div class="modal fade" id="modalHapusAbsen{{ $mhs->id }}" tabindex="-1" role="dialog" aria-hidden="true">
+                                            {{-- Margin-top 40px supaya posisi di atas, tidak terlalu ke tengah --}}
+                                            <div class="modal-dialog" role="document" style="margin-top: 40px;">
+                                                <div class="modal-content border-0 shadow">
+                                                    <div class="modal-header bg-danger text-white">
+                                                        <h5 class="modal-title">Konfirmasi Hapus User</h5>
+                                                        <button type="button" class="close text-white" data-dismiss="modal" aria-label="Close">
+                                                            <span aria-hidden="true">&times;</span>
+                                                        </button>
+                                                    </div>
+                                                    <div class="modal-body text-start">
+                                                        Apakah Anda yakin ingin **{{  $mhs->user->nama }}**? 
+                                                        <br>
+                                                        <small class="text-muted">Data yang sudah dihapus mungkin tidak dapat dikembalikan.</small>
+                                                    </div>
+                                                    <div class="modal-footer bg-light">
+                                                        <button type="button" class="btn btn-secondary" data-dismiss="modal">Batal</button>
+                                                            
+                                                        {{-- Form Hapus --}}
+                                                        <form action="{{ route('anggota-group-hapus-absen-mahasiswa', $mhs->id) }}" method="POST" class="m-0 p-0">
+                                                            @csrf
+                                                            @method('DELETE')
+                                                            <button type="submit" class="btn btn-danger">Ya, Hapus</button>
+                                                        </form>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                       
                                     </div>
                                 </td>
                             </tr>

@@ -33,7 +33,11 @@ class AuthController extends Controller
         ];
 
         if(Auth::attempt($data)){
-            return redirect()->route('dashboard')->with('success', 'Berhasil login');
+            if(Auth::user()->role_id == 1 || Auth::user()->role_id == 2){
+                return redirect()->route('dashboard')->with('success', 'Berhasil login');
+            } else {
+                return redirect()->route('dashboard-mahasiswa')->with('success', 'Berhasil login');
+            }
         } else {
             return redirect()->back()->with('error', 'tidak bisa login');
         }

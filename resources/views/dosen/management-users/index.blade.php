@@ -134,13 +134,45 @@
                                         
                                         @include('dosen.management-users.edit-form')
                                         
-                                        <form action="{{route('manajement-user-hapus-user', $item->id)}}" method="POST" onsubmit="return confirm('Yakin?')">
-                                            @csrf
-                                            @method('DELETE')
-                                            <button type="submit" class="btn btn-sm btn-danger shadow-sm" style="width: 32px; height: 32px;">
-                                                <i class="fas fa-trash"></i>
-                                            </button>
-                                        </form>
+                                        {{-- Tombol Pemicu Modal --}}
+                                        <button type="button" 
+                                                class="btn btn-sm btn-danger shadow-sm d-flex align-items-center justify-content-center" 
+                                                data-toggle="modal" 
+                                                data-target="#modalHapusUser{{ $item->id }}" 
+                                                style="width: 32px; height: 32px;" 
+                                                title="Hapus User">
+                                            <i class="fas fa-trash"></i>
+                                        </button>
+
+                                        {{-- Struktur Modal --}}
+                                        <div class="modal fade" id="modalHapusUser{{ $item->id }}" tabindex="-1" role="dialog" aria-hidden="true">
+                                            {{-- Margin-top 40px supaya posisi di atas, tidak terlalu ke tengah --}}
+                                            <div class="modal-dialog" role="document" style="margin-top: 40px;">
+                                                <div class="modal-content border-0 shadow">
+                                                    <div class="modal-header bg-danger text-white">
+                                                        <h5 class="modal-title">Konfirmasi Hapus User</h5>
+                                                        <button type="button" class="close text-white" data-dismiss="modal" aria-label="Close">
+                                                            <span aria-hidden="true">&times;</span>
+                                                        </button>
+                                                    </div>
+                                                    <div class="modal-body text-start">
+                                                        Apakah Anda yakin ingin menghapus user **{{ $item->name }}**? 
+                                                        <br>
+                                                        <small class="text-muted">Data yang sudah dihapus mungkin tidak dapat dikembalikan.</small>
+                                                    </div>
+                                                    <div class="modal-footer bg-light">
+                                                        <button type="button" class="btn btn-secondary" data-dismiss="modal">Batal</button>
+                                                        
+                                                        {{-- Form Hapus --}}
+                                                        <form action="{{ route('manajement-user-hapus-user', $item->id) }}" method="POST" class="m-0 p-0">
+                                                            @csrf
+                                                            @method('DELETE')
+                                                            <button type="submit" class="btn btn-danger">Ya, Hapus User</button>
+                                                        </form>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
                                     </div>
                                 </td>
                             </tr>

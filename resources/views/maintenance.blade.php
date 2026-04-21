@@ -2,27 +2,36 @@
 
 @section('content')
     <h1 class="h3 mb-4 text-gray-800"> 
-        @if(Route::is('dashboard'))
-            <i class="fas fa-fw fa-tachometer-alt"></i>
-        @elseif(Route::is('jadwal-ngajar')) 
+        {{-- 1. Logika Icon --}}
+        @if(Route::is('dashboard') || Route::is('dashboard-mahasiswa'))
+            <i class="fas fa-fw fa-tachometer-alt text-primary"></i>
+
+        {{-- Halaman yang dipakai bersama atau mirip --}}
+        @elseif(Route::is('jadwal-ngajar') || Route::is('mahasiswa-jadwal')) 
             <i class="fas fa-fw fa-calendar-check text-primary"></i>
+        
+        @elseif(Route::is('tugass-materi') || Route::is('mahasiswa-tugas'))
+            <i class="fas fa-fw fa-book-open text-primary"></i>
+
+        {{-- Halaman KHUSUS Mahasiswa (Contoh: KRS atau Nilai) --}}
+        @elseif(Route::is('KRS-maintenance'))
+            <i class="fas fa-fw fa-book text-primary"></i>
+
+        @elseif(Route::is('mahasiswa-nilai'))
+            <i class="fas fa-fw fa-graduation-cap text-primary"></i>
+
+        {{-- Halaman Profile & Settings (Biasanya sama untuk semua role) --}}
         @elseif(Route::is('profile-profile'))
             <i class="fas fa-user fa-sm fa-fw mr-2 text-primary"></i> 
         @elseif(Route::is('profile-settings'))
             <i class="fas fa-cogs fa-sm fa-fw mr-2 text-primary"></i>
-        @elseif(Route::is('tugass-materi'))
-            <i class="fas fa-fw fa-book-open text-primary"></i>
-        @elseif(Route::is('laporan-presensi'))
-            <i class="fas fa-fw fa-file-pdf text-primary"></i>
-        @elseif(Route::is('rekap-nilai-maintenance'))
-            <i class="fas fa-graduation-cap mr-2 text-primary"></i>
-        @elseif(Route::is('pengumuman'))
-            <i class="fas fa-fw fa-bullhorn mr-2 text-primary"></i>
-        @elseif(Route::is('pertemuan-presensi-maintenance'))
-             <i class="fas fa-fw fa-qrcode text-primary"></i>
+
         @else
-            <i class="fas fa-fw fa-bullhorn"></i>
+            {{-- Icon default jika route tidak terdaftar --}}
+            <i class="fas fa-fw fa-circle-info text-primary"></i>
         @endif
+
+        {{-- 2. Judul Halaman (Variabel dari Controller) --}}
         {{ $title }} 
     </h1>
 
