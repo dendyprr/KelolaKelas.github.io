@@ -107,49 +107,41 @@
             </a>
         </li>
 
-        {{-- Jadwal Kuliah --}}
-        <li class="nav-item">
-            <a class="nav-link" href="#">
-                <i class="fas fa-fw fa-calendar-alt"></i>
-                <span>Jadwal Kuliah</span>
-            </a>
-        </li>
-
         {{-- Kelas Saya --}}
-        <li class="nav-item">
-            <a class="nav-link" href="#">
+        <li class="nav-item {{ $activeKelasSaya ?? '' }}">
+            <a class="nav-link" href="{{route('kelas-saya-maintenance')}}">
                 <i class="fas fa-fw fa-chalkboard-teacher"></i>
                 <span>Kelas Saya</span>
             </a>
         </li>
 
         {{-- Absensi QR --}}
-        <li class="nav-item">
-            <a class="nav-link" href="#">
+        <li class="nav-item {{ $activeAbsen ?? '' }}">
+            <a class="nav-link" href="{{route('absen-maintenance')}}">
                 <i class="fas fa-fw fa-qrcode"></i>
                 <span>Absensi QrCode</span>
             </a>
         </li>
 
         {{-- Tugas & Materi --}}
-        <li class="nav-item">
-            <a class="nav-link" href="#">
+        <li class="nav-item {{ $activeTugasDanMateri ?? '' }}">
+            <a class="nav-link" href="{{route('tugas-materi-maintenance')}}">
                 <i class="fas fa-fw fa-tasks"></i>
-                <span>Tugas Dan Materi</span>
+                <span>Materi Dan Tugas</span>
             </a>
         </li>
 
         {{-- Nilai --}}
-        <li class="nav-item">
-            <a class="nav-link" href="#">
+        <li class="nav-item {{ $activeNilai ?? '' }}">
+            <a class="nav-link" href="{{route('nilai-maintenance')}}">
                 <i class="fas fa-fw fa-graduation-cap"></i>
                 <span>Nilai</span>
             </a>
         </li>
 
         {{-- Pengumuman --}}
-        <li class="nav-item">
-            <a class="nav-link" href="#">
+        <li class="nav-item {{ $activePengumuman ?? '' }}">
+            <a class="nav-link" href="{{route('pengumuman-maintenance')}}">
                 <i class="fas fa-fw fa-bullhorn"></i>
                 <span>Pengumuman</span>
             </a>

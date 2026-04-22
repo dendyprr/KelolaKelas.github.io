@@ -13,8 +13,13 @@ use App\Http\Controllers\dosen\PengumumanController;
 use App\Http\Controllers\dosen\PertemuanPresensiController;
 use App\Http\Controllers\dosen\ProfileController;
 use App\Http\Controllers\dosen\RekapNilaiController;
+use App\Http\Controllers\mahasiswa\AbsensiMahasiswaController;
 use App\Http\Controllers\mahasiswa\DashboardMahasiswaController;
+use App\Http\Controllers\mahasiswa\KelasSayaMahasiswaController;
 use App\Http\Controllers\mahasiswa\KrsMahasiswaController;
+use App\Http\Controllers\mahasiswa\MateriTugasMahasiswaController;
+use App\Http\Controllers\mahasiswa\NilaiMahasiswaController;
+use App\Http\Controllers\mahasiswa\PengumumanMahasiswaController;
 use Illuminate\Support\Facades\Route;
 
 Route::get('/', function () {
@@ -103,6 +108,26 @@ Route::middleware('cekLogin')->group(function() {
         
         Route::prefix('KRS')->group(function () {
             Route::get('/', [KrsMahasiswaController::class, 'maintenance'])->name('KRS-maintenance');
+        });
+        
+        Route::prefix('kelas-saya')->group(function () {
+            Route::get('/', [KelasSayaMahasiswaController::class, 'maintenance'])->name('kelas-saya-maintenance');
+        });
+        
+        Route::prefix('absen')->group(function () {
+            Route::get('/', [AbsensiMahasiswaController::class, 'maintenance'])->name('absen-maintenance');
+        });
+        
+        Route::prefix('tugas-materi')->group(function () {
+            Route::get('/', [MateriTugasMahasiswaController::class, 'maintenance'])->name('tugas-materi-maintenance');
+        });
+        
+        Route::prefix('nilai')->group(function () {
+            Route::get('/', [NilaiMahasiswaController::class, 'maintenance'])->name('nilai-maintenance');
+        });
+        
+        Route::prefix('pengumuman')->group(function () {
+            Route::get('/', [PengumumanMahasiswaController::class, 'maintenance'])->name('pengumuman-maintenance');
         });
     });
     
