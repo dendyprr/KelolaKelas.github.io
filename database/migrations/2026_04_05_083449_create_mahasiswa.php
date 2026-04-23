@@ -12,7 +12,7 @@ return new class extends Migration
             $table->id();
             $table->foreignId('user_id')->constrained('users')->onDelete('cascade');
             $table->foreignId('kelas_id')->nullable()->constrained('kelas')->onDelete('cascade');
-            $table->string('')->unique()->nullable();
+            $table->string('nim')->unique()->nullable();
             $table->string('jurusan')->nullable();
             $table->string('angkatan')->nullable();
             $table->timestamps();
