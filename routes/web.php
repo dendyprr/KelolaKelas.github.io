@@ -11,7 +11,6 @@ use App\Http\Controllers\dosen\ManagementUserController;
 use App\Http\Controllers\dosen\MateriTugasController;
 use App\Http\Controllers\dosen\PengumumanController;
 use App\Http\Controllers\dosen\PertemuanPresensiController;
-use App\Http\Controllers\dosen\ProfileController;
 use App\Http\Controllers\dosen\RekapNilaiController;
 use App\Http\Controllers\mahasiswa\AbsensiMahasiswaController;
 use App\Http\Controllers\mahasiswa\DashboardMahasiswaController;
@@ -20,6 +19,8 @@ use App\Http\Controllers\mahasiswa\KrsMahasiswaController;
 use App\Http\Controllers\mahasiswa\MateriTugasMahasiswaController;
 use App\Http\Controllers\mahasiswa\NilaiMahasiswaController;
 use App\Http\Controllers\mahasiswa\PengumumanMahasiswaController;
+use App\Http\Controllers\ProfileController;
+use App\Http\Controllers\SettingsController;
 use Illuminate\Support\Facades\Route;
 
 Route::get('/', function () {
@@ -33,12 +34,7 @@ Route::middleware('cekLogin')->group(function() {
         Route::prefix('dashboard')->group(function () {
             Route::get('/', [DashboardController::class, 'index'])->name('dashboard');
         });
-
-        Route::prefix('profile')->group(function () {
-            Route::get('/profile', [ProfileController::class, 'index'])->name('profile-profile');
-            Route::get('/settings', [ProfileController::class, 'settingsIndex'])->name('profile-settings');
-        });
-        
+         
         Route::prefix('pengumuman')->group(function () {
             Route::get('/', [PengumumanController::class, 'index'])->name('pengumuman');
         });
@@ -130,6 +126,15 @@ Route::middleware('cekLogin')->group(function() {
             Route::get('/', [PengumumanMahasiswaController::class, 'maintenance'])->name('pengumuman-maintenance');
         });
     });
+
+    Route::prefix('profile')->group(function () {
+        Route::get('/profile', [ProfileController::class, 'index'])->name('profile-profile');
+    });
+    
+    Route::prefix('pengaturan')->group(function () {
+        Route::get('/settings', [SettingsController::class, 'index'])->name('pengaturan-settings');
+    });
+    
     
 });
 

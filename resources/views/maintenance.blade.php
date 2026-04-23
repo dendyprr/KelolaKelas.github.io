@@ -51,7 +51,7 @@
         {{-- Halaman Profile & Settings (Biasanya sama untuk semua role) --}}
         @elseif(Route::is('profile-profile'))
             <i class="fas fa-user fa-sm fa-fw mr-2 text-primary"></i> 
-        @elseif(Route::is('profile-settings'))
+        @elseif(Route::is('pengaturan-settings'))
             <i class="fas fa-cogs fa-sm fa-fw mr-2 text-primary"></i>
 
         @else
