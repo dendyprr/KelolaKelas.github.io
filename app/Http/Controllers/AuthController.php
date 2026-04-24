@@ -39,10 +39,10 @@ class AuthController extends Controller
                 return redirect()->route('dashboard-mahasiswa')->with('success', 'Berhasil login');
             }
         } else {
-            return redirect()->back()->with('error', 'tidak bisa login');
+            return redirect()->back()->with('error', 'Email atau Password salah!')->withInput($request->only('email'));
         }
-
     }
+
 
     public function logout(Request $request)
     {

@@ -14,19 +14,28 @@
 	<link rel="stylesheet" type="text/css" href="{{asset('login-form/Login_v1/css/main.css')}}">
 </head>
 <body>
+
+	
 	
 	<div class="limiter">
 		<div class="container-login100">
 			<div class="wrap-login100">
 				<div class="login100-pic js-tilt" data-tilt>
 					<img src="{{asset('login-form/Login_v1/images/img-01.png')}}" alt="IMG">
-				</div>
+				</div>		
 
 				<form action="{{route('auth-login-proccess')}}" method="POST" class="login100-form validate-form" autocomplete="off">
                     @csrf
+
 					<span class="login100-form-title">
 						Member Login
 					</span>
+
+					@if(session('error'))
+						<div class="alert alert-danger font-weight-bold small">
+							{{ session('error') }}
+						</div>
+					@endif
 
 					<div class="wrap-input100 validate-input" data-validate = "Valid email is required: ex@abc.xyz">
 						<input class="input100 @error('email') is-invalid @enderror" type="text" name="email" placeholder="Email" value="{{old('email')}}" autocomplete="off">
@@ -47,11 +56,11 @@
 						<span class="symbol-input100">
 							<i class="fa fa-lock" aria-hidden="true"></i>
 						</span>
-						@error('email')
-                            <small class="text-danger font-weight-bold">
-                                {{ $message }}
-                            </small>
-                        @enderror
+						@error('password') 
+							<small class="text-danger font-weight-bold">
+								{{ $message }}
+							</small>
+						@enderror
 					</div>
 					
 					<div class="container-login100-form-btn">

@@ -128,11 +128,14 @@ Route::middleware('cekLogin')->group(function() {
     });
 
     Route::prefix('profile')->group(function () {
-        Route::get('/profile', [ProfileController::class, 'index'])->name('profile-profile');
+        Route::get('/', [ProfileController::class, 'index'])->name('profile-profile');
+        Route::get('/edit/{id}/profile', [ProfileController::class, 'edit'])->name('profile-edit');
+        Route::put('/edit-proccess/{id}/profile', [ProfileController::class, 'updateProfile'])->name('profile-edit-proccess');
     });
     
     Route::prefix('pengaturan')->group(function () {
-        Route::get('/settings', [SettingsController::class, 'index'])->name('pengaturan-settings');
+        Route::get('/', [SettingsController::class, 'index'])->name('pengaturan-settings');
+        Route::put('/update-password', [SettingsController::class, 'updatePassword'])->name('pengaturan-update-password');
     });
     
     

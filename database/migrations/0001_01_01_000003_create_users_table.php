@@ -13,6 +13,8 @@ return new class extends Migration
             $table->id();
             $table->foreignId('role_id')->constrained('master_role')->nullable();
             $table->string('nama');
+            $table->string('image')->nullable();
+            $table->string('alamat')->nullable();
             $table->string('email')->unique(); 
             $table->string('password')->nullable();
             $table->enum('jenis_kelamin', ['L', 'P']); 

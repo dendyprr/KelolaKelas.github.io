@@ -21,7 +21,8 @@ class User extends Authenticatable
         'password',
         'role_id',
         'NIDN',
-        'jenis_kelamin'
+        'jenis_kelamin',
+        'alamat'
     ];
 
    

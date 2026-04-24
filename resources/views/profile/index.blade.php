@@ -38,7 +38,7 @@
                                 </div>
                                 <div class="mb-4">
                                     <label class="small font-weight-bold text-primary">EMAIL</label>
-                                    <p class="text-gray-700 h6 font-weight-bold">{{ $data->email }}</p>
+                                        <p class="text-gray-700 h6 font-weight-bold">{{ $data->email }}</p>
                                     <hr>
                                 </div>
                                 <div class="mb-4">
@@ -48,6 +48,15 @@
                                     </p>
                                     <hr>
                                 </div>
+                                @if ($data->role_id == 3)
+                                    <div class="mb-4">
+                                        <label class="small font-weight-bold text-primary">Jurusan</label>
+                                        <p class="text-gray-700 h6 font-weight-bold">
+                                            <p class="text-gray-700 h6 font-weight-bold">{{ $data->mahasiswa->jurusan }}</p>
+                                        </p>
+                                        <hr>
+                                    </div>
+                                @endif
                             </div>
 
                             <div class="col-md-6 px-lg-5">
@@ -60,11 +69,11 @@
                                 @endif
 
                                 @if($data->role_id == 3)
-                                <div class="mb-4">
-                                    <label class="small font-weight-bold text-primary">NIM</label>
-                                    <p class="text-gray-700 h6 font-weight-bold">{{ $data->mahasiswa->nim ?? '-' }}</p>
-                                    <hr>
-                                </div>
+                                    <div class="mb-4">
+                                        <label class="small font-weight-bold text-primary">NIM</label>
+                                        <p class="text-gray-700 h6 font-weight-bold">{{ $data->mahasiswa->nim ?? '-' }}</p>
+                                        <hr>
+                                    </div>
                                 @endif
 
                                 <div class="mb-4">
@@ -76,13 +85,20 @@
                                     <label class="small font-weight-bold text-primary">ALAMAT</label>
                                     <p class="text-gray-700 h6 font-weight-bold">{{ $data->alamat ?? 'Belum diatur' }}</p>
                                     <hr>
-                                </div>
+                                </div>  
+                                @if ($data->role_id == 3)
+                                    <div class="mb-4">
+                                        <label class="small font-weight-bold text-primary">Angkatan</label>
+                                            <p class="text-gray-700 h6 font-weight-bold">{{ $data->mahasiswa->angkatan }}</p>
+                                        <hr>
+                                    </div>
+                                @endif
                             </div>
                         </div>
                     </div>
 
                     <div class="mt-4 mb-3">
-                        <a href="#" class="btn btn-primary btn-icon-split shadow-sm">
+                        <a href="{{route('profile-edit', $data->id)}}" class="btn btn-primary btn-icon-split shadow-sm">
                             <span class="icon text-white-50">
                                 <i class="fas fa-user-edit"></i>
                             </span>

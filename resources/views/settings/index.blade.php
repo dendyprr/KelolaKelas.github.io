@@ -6,6 +6,15 @@
         {{ $title }} 
     </h1>
 
+    @if(session('success'))
+        <div class="alert alert-success alert-dismissible fade show border-0 shadow-sm" role="alert">
+            <i class="fas fa-check-circle mr-2"></i> {{ session('success') }}
+            <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+                <span aria-hidden="true">&times;</span>
+            </button>
+        </div>
+    @endif
+
     <div class="row">
         <div class="col-12">
             <div class="card shadow mb-4 border-0">
@@ -28,7 +37,7 @@
                         </div>
 
                         <div class="col-xl-8 col-lg-12">
-                            <form action="#" method="POST" class="px-lg-4">
+                            <form action="{{route('pengaturan-update-password')}}" method="POST" class="px-lg-4">
                                 @csrf
                                 @method('PUT')
 
@@ -39,14 +48,17 @@
                                             <span class="input-group-text bg-light border-right-0"><i class="fas fa-key text-muted"></i></span>
                                         </div>
                                         <input type="password" name="current_password" id="current_password"
-                                               class="form-control border-left-0 border-right-0 @error('current_password') is-invalid @enderror" 
-                                               placeholder="Masukkan password lama" required>
+                                            class="form-control border-left-0 border-right-0 @error('current_password') is-invalid @enderror" 
+                                            placeholder="Masukkan password lama" required>
                                         <div class="input-group-append">
                                             <button class="btn btn-outline-light border-left-0 text-muted toggle-password" type="button" data-target="current_password">
-                                                <i class="fas fa-eye"></i>
+                                                <i class="fas fa-eye-slash"></i>
                                             </button>
                                         </div>
                                     </div>
+                                    @error('current_password')
+                                        <small class="text-danger font-weight-bold">{{ $message }}</small>
+                                    @enderror
                                 </div>
 
                                 <hr class="my-4">
@@ -60,14 +72,17 @@
                                                     <span class="input-group-text bg-light border-right-0"><i class="fas fa-lock-open text-muted"></i></span>
                                                 </div>
                                                 <input type="password" name="new_password" id="new_password"
-                                                       class="form-control border-left-0 border-right-0 @error('new_password') is-invalid @enderror" 
-                                                       placeholder="Minimal 8 karakter" required>
+                                                    class="form-control border-left-0 border-right-0 @error('new_password') is-invalid @enderror" 
+                                                    placeholder="Minimal 5 karakter" required>
                                                 <div class="input-group-append">
                                                     <button class="btn btn-outline-light border-left-0 text-muted toggle-password" type="button" data-target="new_password">
-                                                        <i class="fas fa-eye"></i>
+                                                        <i class="fas fa-eye-slash"></i>
                                                     </button>
                                                 </div>
                                             </div>
+                                            @error('new_password')
+                                                <small class="text-danger font-weight-bold">{{ $message }}</small>
+                                            @enderror
                                         </div>
                                     </div>
 
@@ -79,11 +94,11 @@
                                                     <span class="input-group-text bg-light border-right-0"><i class="fas fa-check-double text-muted"></i></span>
                                                 </div>
                                                 <input type="password" name="new_password_confirmation" id="new_password_confirmation"
-                                                       class="form-control border-left-0 border-right-0" 
-                                                       placeholder="Ulangi password baru" required>
+                                                    class="form-control border-left-0 border-right-0" 
+                                                    placeholder="Ulangi password baru" required>
                                                 <div class="input-group-append">
                                                     <button class="btn btn-outline-light border-left-0 text-muted toggle-password" type="button" data-target="new_password_confirmation">
-                                                        <i class="fas fa-eye"></i>
+                                                        <i class="fas fa-eye-slash"></i>
                                                     </button>
                                                 </div>
                                             </div>
