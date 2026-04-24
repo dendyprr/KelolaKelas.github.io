@@ -12,6 +12,6 @@ class SettingsController extends Controller
             'title'                     => 'Pengaturan',
         ];
 
-        return view('maintenance', $data);
+        return view('settings.index', $data);
     }
 }
