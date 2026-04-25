@@ -33,6 +33,7 @@
                             <form action="{{route('profile-edit-proccess', Auth::user()->id)}}" method="POST" class="px-lg-4" autocomplete="off">
                                 @csrf
                                 @method('PUT')
+                                <input type="hidden" name="role_id" value="{{ Auth::user()->role_id }}">
 
                                 <div class="row">
                                     <div class="col-12">
@@ -106,7 +107,7 @@
                                     <div class="col-12">
                                         <div class="form-group mb-4">
                                             <label class="small font-weight-bold text-primary text-uppercase">Alamat Lengkap</label>
-                                            <textarea name="alamat" class="form-control"  autocomplete="off" rows="3">{{ old('alamat') }}</textarea>
+                                            <textarea name="alamat" class="form-control"  autocomplete="off" rows="3">{{ old('alamat', Auth::user()->alamat) }}</textarea>
                                         </div>
                                     </div>
                                 </div>

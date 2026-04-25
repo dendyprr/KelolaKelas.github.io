@@ -30,63 +30,69 @@ class ProfileController extends Controller
 
     public function updateProfile(Request $request)
     {
-        // dd($request->all());
         $user = Auth::user();
 
+        // 1. Definisikan Rule Validasi
         $rules = [
             'nama'          => 'required|string|max:255',
-            'email'         => 'required|email',
+            'email'         => 'nullable|email',
             'jenis_kelamin' => 'required|string',
-            'jurusan'       => 'required|string',
-            'angkatan'      => 'required|string',
             'alamat'        => 'nullable|string',
+            'phone'         => 'nullable|string',
         ];
 
         if ($user->role_id == 1) {
-        // Jika Admin/Dosen, NIDN wajib, nim abaikan
-            $rules['NIDN'] = 'required|integer';
+            $rules['NIDN'] = 'required|string';
         } else {
-            // Jika Mahasiswa, NIM wajib, NIDN abaikan
-            $rules['nim']      = 'required|string'; // Ubah ke string jika nim ada karakter/panjang
-            $rules['jurusan']  = 'required|string'; // PASTIKAN INI STRING, bukan integer
+            $rules['nim']      = 'required|string';
+            $rules['jurusan']  = 'required|string';
             $rules['angkatan'] = 'required|string';
         }
 
+        // 2. Jalankan Validasi dengan Pesan Bahasa Indonesia
         $request->validate($rules, [
-            'nama.required'          => 'Nama tidak boleh kosong.',
-            'jurusan.required'       => 'Jurusan tidak boleh kosong.',
-            'angkatan.required'      => 'Angkatan tidak boleh kosong.',
-            'email.required'         => 'Email tidak boleh kosong.',
-            'jenis_kelamin.required' => 'Jenis kelamin tidak boleh kosong.',
-            'nim.required'           => 'NIM tidak boleh kosong.',
-            'NIDN.required'          => 'NIDN tidak boleh kosong.',
+            // Pesan untuk Nama
+            'nama.required'          => 'Nama lengkap tidak boleh kosong.',
+            'nama.string'            => 'Format nama harus berupa teks.',
+            'email.email'            => 'Format email yang Anda masukkan tidak valid.',
+            
+            // Pesan untuk Jenis Kelamin
+            'jenis_kelamin.required' => 'Silakan pilih jenis kelamin Anda.',
+            
+            // Pesan untuk Mahasiswa (NIM, Jurusan, Angkatan)
+            'nim.required'           => 'Nomor Induk Mahasiswa (NIM) wajib diisi.',
+            'jurusan.required'       => 'Program studi/Jurusan tidak boleh kosong.',
+            'angkatan.required'      => 'Tahun angkatan wajib diisi.',
+            
+            // Pesan untuk Dosen (NIDN)
+            'NIDN.required'          => 'Nomor Induk Dosen (NIDN) tidak boleh kosong.',
         ]);
 
-        $updateData = [
-            'nama'          => $request->nama,
-            'email'         => $request->email,
-            'phone'         => $request->phone,
-            'alamat'        => $request->alamat,
-            'jenis_kelamin' => $request->jenis_kelamin,
-        ];
-
-        if ($user->role_id == 1) {
-            $updateData['NIDN'] = $request->NIDN;
-        }
-
-        // Update tabel Users
-        $user->update($updateData);
-
-        // 5. Update tabel Mahasiswa (lewat relasi)
-        if ($user->role_id != 1 && $user->mahasiswa) {
-            $user->mahasiswa->update([
-                'nim'      => $request->nim,
-                'jurusan'  => $request->jurusan,
-                'angkatan' => $request->angkatan,
+        try {
+            // 3. Proses Update Tabel Users
+            $user->update([
+                'nama'          => $request->nama,
+                'email'         => $request->email,
+                'phone'         => $request->phone,
+                'alamat'        => $request->alamat,
+                'jenis_kelamin' => $request->jenis_kelamin,
+                'NIDN'          => ($user->role_id == 1) ? $request->NIDN : $user->NIDN,
             ]);
-        }
 
-        return back()->with('success', 'Profil Anda berhasil diperbarui!');
+            // 4. Proses Update Tabel Mahasiswa
+            if ($user->role_id != 1 && $user->mahasiswa) {
+                $user->mahasiswa->update([
+                    'nim'      => $request->nim,
+                    'jurusan'  => $request->jurusan,
+                    'angkatan' => $request->angkatan,
+                ]);
+            }
+
+            return back()->with('success', 'Profil Anda berhasil diperbarui!');
+
+        } catch (\Exception $e) {
+            return back()->withInput()->with('error', 'Terjadi kesalahan: ' . $e->getMessage());
+        }
     }
 
     
