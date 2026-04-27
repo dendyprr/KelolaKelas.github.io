@@ -37,6 +37,8 @@ Route::middleware('cekLogin')->group(function() {
          
         Route::prefix('pengumuman')->group(function () {
             Route::get('/', [PengumumanController::class, 'index'])->name('pengumuman');
+            Route::get('/tambah', [PengumumanController::class, 'add'])->name('pengumuman-tambah');
+            Route::post('/tambah-proccess', [PengumumanController::class, 'store'])->name('pengumuman-tambah-proccess');
         });
         
         Route::prefix('laporan-presensi')->group(function () {
@@ -124,6 +126,7 @@ Route::middleware('cekLogin')->group(function() {
         
         Route::prefix('pengumuman')->group(function () {
             Route::get('/', [PengumumanMahasiswaController::class, 'maintenance'])->name('pengumuman-maintenance');
+            // Route::get('/', [PengumumanMahasiswaController::class, 'maintenance'])->name('pengumuman-maintenance');
         });
     });
 

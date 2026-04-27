@@ -41,6 +41,12 @@ class User extends Authenticatable
         return $this->belongsTo(MasterRole::class, 'role_id');
     }
     
+    public function pengumumans()
+    {
+        // Satu user bisa membuat banyak pengumuman
+        return $this->hasMany(Pengumuman::class);
+    }
+    
     protected function casts(): array
     {
         return [
