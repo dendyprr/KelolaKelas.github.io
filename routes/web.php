@@ -39,6 +39,10 @@ Route::middleware('cekLogin')->group(function() {
             Route::get('/', [PengumumanController::class, 'index'])->name('pengumuman');
             Route::get('/tambah', [PengumumanController::class, 'add'])->name('pengumuman-tambah');
             Route::post('/tambah-proccess', [PengumumanController::class, 'store'])->name('pengumuman-tambah-proccess');
+            Route::delete('/{id}/hapus', [PengumumanController::class, 'delete'])->name('pengumuman-hapus');
+            // 4. Edit & Update Data
+            Route::get('/{id}/edit', [PengumumanController::class, 'edit'])->name('pengumuman.edit');
+            Route::put('/{id}/update', [PengumumanController::class, 'update'])->name('pengumuman.update');
         });
         
         Route::prefix('laporan-presensi')->group(function () {

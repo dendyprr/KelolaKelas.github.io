@@ -3,16 +3,15 @@
 @section('content')
     <h1 class="h3 mb-4 text-gray-800"> 
         <i class="fas fa-bullhorn mr-2 text-primary"></i>
-        Buat Pengumuman Baru
+        {{ $title }} 
     </h1>
 
     <div class="card shadow mb-4">
         {{-- Breadcrumb Navigation --}}
         <nav aria-label="breadcrumb" class="bg-primary p-2 rounded-top">
             <ol class="breadcrumb mb-0 bg-transparent">
-                <li class="breadcrumb-item"><a href="#" class="text-white">Dashboard</a></li>
-                <li class="breadcrumb-item"><a href="#" class="text-white">Pengumuman</a></li>
-                <li class="breadcrumb-item active text-white-50" aria-current="page">Tambah Data</li>
+                <li class="breadcrumb-item"><a href="{{route('pengumuman')}}" class="text-white">Pengumuman</a></li>
+                <li class="breadcrumb-item text-white font-weight-bold" aria-current="page" >{{ $title }} </li>
             </ol>
         </nav>
 
@@ -20,7 +19,6 @@
             {{-- Pastikan ada enctype untuk upload file --}}
             <form action="{{route('pengumuman-tambah-proccess')}}" method="POST" enctype="multipart/form-data" autocomplete="off">
                 @csrf
-
                 <div class="row">
                     <div class="col-lg-8">
                         <div class="form-group mb-4">
@@ -47,9 +45,10 @@
                             <div class="form-group mb-3">
                                 <label class="font-weight-bold small">Target Audience <span class="text-danger">*</span></label>
                                 <select name="target" class="form-control form-control-sm">
-                                    <option value="Semua" {{ old('target') == 'Semua' ? 'selected' : '' }}>Semua Mahasiswa</option>
-                                    <option value="Teknik Informatika" {{ old('target') == 'Teknik Informatika' ? 'selected' : '' }}>Teknik Informatika</option>
-                                    <option value="Sistem Informasi" {{ old('target') == 'Sistem Informasi' ? 'selected' : '' }}>Sistem Informasi</option>
+                                    <option value="0">Semua User</option>
+                                    <option value="1">Admin</option>
+                                    <option value="2">Dosen</option>
+                                    <option value="3">Mahasiswa</option>
                                 </select>
                             </div>
 

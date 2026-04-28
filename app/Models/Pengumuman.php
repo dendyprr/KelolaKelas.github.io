@@ -6,6 +6,8 @@ use Illuminate\Database\Eloquent\Model;
 
 class Pengumuman extends Model
 {
+    protected $table = 'pengumuman';
+
     protected $fillable = [
         'user_id',
         'judul',
@@ -14,6 +16,8 @@ class Pengumuman extends Model
         'file',
         'is_urgent'
     ];
+
+    
 
     public function user()
     {

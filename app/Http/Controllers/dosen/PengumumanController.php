@@ -3,9 +3,11 @@
 namespace App\Http\Controllers\dosen;
 
 use App\Models\Pengumuman;
-use Dotenv\Util\Str;
+use App\Models\User;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\Storage;
+use Illuminate\Support\Str;
 
 class PengumumanController extends Controller
 {
@@ -15,7 +17,7 @@ class PengumumanController extends Controller
         $data = [
             'title'             => 'Pengumuman',
             'activePengumuman'  => 'active',
-            'pengumumans'      => Pengumuman::with('user')->latest()->paginate(10),
+            'pengumumans'       => Pengumuman::with('user')->latest()->paginate(10),
         ];
         return view('dosen.pengumuman.index', $data);
     }
@@ -23,7 +25,9 @@ class PengumumanController extends Controller
     public function add()
     {
         $data = [
-            'title'             => 'Tambah Pengumuman',
+            'title'                    => 'Tambah Pengumuman',
+            // 'roles'                    => \DB::table('users')->select('master_role')->distinct()->get(),
+            'roles'                    => User::with('role')->distinct()->get(),
             'pengumumans'              => Pengumuman::all(),
         ];
         return view('dosen.pengumuman.add', $data);
@@ -67,7 +71,7 @@ class PengumumanController extends Controller
             Pengumuman::create($data);
 
             // Arahkan kembali ke halaman index pengumuman
-            return redirect()->route('pengumuman.index')->with('success', 'Pengumuman berhasil dipublikasikan!');
+            return redirect()->route('pengumuman')->with('success', 'Pengumuman berhasil dipublikasikan!');
 
         } catch (\Exception $e) {
             // Jika gagal, hapus file yang terlanjur diupload (jika ada)
@@ -76,6 +80,63 @@ class PengumumanController extends Controller
             }
 
             return back()->withInput()->with('error', 'Gagal menyimpan pengumuman: ' . $e->getMessage());
+        }
+    }
+
+    public function edit($id)
+    {
+        $data = [
+            'title'             => 'Edit Pengumuman',
+            'activePengumuman'  => 'active',
+            'item'              => Pengumuman::findOrFail($id),
+        ];
+        return view('dosen.pengumuman.edit', $data);
+    }
+
+    public function update(Request $request, $id)
+    {
+        $item = Pengumuman::findOrFail($id);
+          
+        $data = $request->only(['judul', 'isi', 'target']);
+        $data['is_urgent'] = $request->has('is_urgent') ? 1 : 0;
+
+        if ($request->hasFile('file')) {
+            // Hapus file lama jika ada
+            if ($item->file) {
+                Storage::disk('public')->delete('pengumuman/' . $item->file);
+            }
+            // Upload file baru
+            $filename = time() . '_' . $request->file('file')->getClientOriginalName();
+            $request->file('file')->storeAs('pengumuman', $filename, 'public');
+            $data['file'] = $filename;
+        }
+
+        $item->update($data);
+
+        return redirect()->route('pengumuman.edit', $id)->with('success', 'Pengumuman berhasil diupdate!');
+    }
+
+    public function delete($id)
+    {
+        // $data = Pengumuman::firstOrFail($id);
+        $data = Pengumuman::findOrFail($id);
+
+        try{
+            
+            if($data->file){
+                
+                $filePath = 'pengumuman/' . $data->file;
+
+                if(Storage::disk('public')->exists($filePath)){
+                   Storage::disk('public')->delete($filePath);
+                }
+            }
+
+            $data->delete();
+
+            return redirect()->back()->with('success', 'Pengumuman dan lampirannya berhasil dihapus!');
+        } catch (\Exception $e) {
+            return redirect()->back()->with('error', 'Gagal menghapus data: ' . $e->getMessage());
         }
     }
 
