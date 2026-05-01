@@ -115,24 +115,42 @@
                                <td class="text-center align-middle">
                                     @if($item->file)
                                         @php
-                                            // Ambil ekstensi file
-                                            $ekstensi = pathinfo($item->file, PATHINFO_EXTENSION);
-                                            $is_image = in_array(strtolower($ekstensi), ['jpg', 'jpeg', 'png', 'gif', 'webp']);
+                                            $ekstensi = strtolower(pathinfo($item->file, PATHINFO_EXTENSION));
                                         @endphp
 
-                                        @if($is_image)
-                                            {{-- Tampilan Jika File Adalah Gambar --}}
+                                        @if(in_array($ekstensi, ['jpg', 'jpeg', 'png', 'gif', 'webp']))
+                                            {{-- IMAGE --}}
                                             <a href="{{ asset('storage/pengumuman/' . $item->file) }}" target="_blank" class="btn btn-sm btn-outline-info">
-                                                <i class="fas fa-image mr-1"></i> IMAGE
+                                                <i class="fas fa-image"></i> IMAGE
+                                            </a>
+                                        @elseif($ekstensi == 'pdf')
+                                            {{-- PDF --}}
+                                            <a href="{{ asset('storage/pengumuman/' . $item->file) }}" target="_blank" class="btn btn-sm btn-outline-danger">
+                                                <i class="fas fa-file-pdf"></i> PDF
+                                            </a>
+                                        @elseif(in_array($ekstensi, ['doc', 'docx']))
+                                            {{-- WORD --}}
+                                            <a href="{{ asset('storage/pengumuman/' . $item->file) }}" target="_blank" class="btn btn-sm btn-outline-primary">
+                                                <i class="fas fa-file-word"></i> WORD
+                                            </a>
+                                        @elseif(in_array($ekstensi, ['xls', 'xlsx', 'csv']))
+                                            {{-- EXCEL --}}
+                                            <a href="{{ asset('storage/pengumuman/' . $item->file) }}" target="_blank" class="btn btn-sm btn-outline-success">
+                                                <i class="fas fa-file-excel"></i> EXCEL
+                                            </a>
+                                        @elseif(in_array($ekstensi, ['ppt', 'pptx']))
+                                            {{-- PPT --}}
+                                            <a href="{{ asset('storage/pengumuman/' . $item->file) }}" target="_blank" class="btn btn-sm btn-outline-warning">
+                                                <i class="fas fa-file-powerpoint"></i> PPT
                                             </a>
                                         @else
-                                            {{-- Tampilan Jika File Adalah PDF atau lainnya --}}
-                                            <a href="{{ asset('storage/pengumuman/' . $item->file) }}" target="_blank" class="btn btn-sm btn-outline-danger">
-                                                <i class="fas fa-file-pdf mr-1"></i> PDF
+                                            {{-- FILE LAINNYA --}}
+                                            <a href="{{ asset('storage/pengumuman/' . $item->file) }}" target="_blank" class="btn btn-sm btn-outline-secondary">
+                                                <i class="fas fa-file-alt"></i> FILE
                                             </a>
                                         @endif
                                     @else
-                                        <span class="text-muted italic small">Tidak ada</span>
+                                        <span class="text-muted small"><i>Tidak ada</i></span>
                                     @endif
                                 </td>
                                 <td class="align-middle"> 

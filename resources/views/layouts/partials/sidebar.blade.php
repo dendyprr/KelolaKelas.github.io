@@ -141,7 +141,7 @@
 
         {{-- Pengumuman --}}
         <li class="nav-item {{ $activePengumuman ?? '' }}">
-            <a class="nav-link" href="{{route('pengumuman-maintenance')}}">
+            <a class="nav-link" href="{{route('pengumuman-mahasiswa-index')}}">
                 <i class="fas fa-fw fa-bullhorn"></i>
                 <span>Pengumuman</span>
             </a>

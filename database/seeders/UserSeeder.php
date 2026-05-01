@@ -23,14 +23,14 @@ class UserSeeder extends Seeder
             'role_id'       => 1, 
             'nama'          => 'Dandy Prasetyo Ramadhan',
             'email'         => 'dandy@dosen.com',
-            'password'      => Hash::make('password123'),
+            'password'      => Hash::make('pov123'),
             'NIDN'          => '1234567890',
             'jenis_kelamin' => 'L', // Tambahkan di sini
         ]);
 
         // --- 2. DATA MAHASISWA 2024 ---
         $mhs24 = [
-            ['nim' => '24001', 'nama' => 'Budi Setiadi', 'jk' => 'L'],
+            ['nim' => '24001', 'nama' => 'Hani Sarwendah', 'jk' => 'L'],
             ['nim' => '24002', 'nama' => 'Siti Aminah', 'jk' => 'P'],
             ['nim' => '24003', 'nama' => 'Randi Pangalila', 'jk' => 'L'],
             ['nim' => '24004', 'nama' => 'Lestari Putri', 'jk' => 'P'],

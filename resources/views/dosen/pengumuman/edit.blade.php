@@ -1,10 +1,18 @@
 @extends('layouts.app')
 
 @section('content')
-    <h1 class="h3 mb-4 text-gray-800"> 
-        <i class="fas fa-bullhorn mr-2 text-success"></i>
-        {{ $title }} 
-    </h1>
+    <div class="d-sm-flex align-items-center mb-4">
+        {{-- 1. Tombol Kembali (Paling Kiri) --}}
+        <a href="{{ route('pengumuman') }}" class="btn btn-sm btn-white shadow-sm mr-3 border rounded-circle" style="width: 35px; height: 35px; display: flex; align-items: center; justify-content: center;">
+            <i class="fas fa-arrow-left text-success"></i>
+        </a>
+        
+        {{-- 2. Judul Halaman dengan Icon Bullhorn --}}
+        <h1 class="h3 mb-0 text-gray-800 font-weight-bold"> 
+            <i class="fas fa-bullhorn mr-2 text-success"></i>
+            {{ $title }} 
+        </h1>
+    </div>
 
     <div class="card shadow mb-4 border-left-success">
         <div class="card-body text-dark">

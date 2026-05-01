@@ -43,6 +43,8 @@ Route::middleware('cekLogin')->group(function() {
             // 4. Edit & Update Data
             Route::get('/{id}/edit', [PengumumanController::class, 'edit'])->name('pengumuman.edit');
             Route::put('/{id}/update', [PengumumanController::class, 'update'])->name('pengumuman.update');
+
+             Route::get('/{id}/detail', [PengumumanController::class, 'show'])->name('pengumuman.show');
         });
         
         Route::prefix('laporan-presensi')->group(function () {
@@ -129,7 +131,11 @@ Route::middleware('cekLogin')->group(function() {
         });
         
         Route::prefix('pengumuman')->group(function () {
-            Route::get('/', [PengumumanMahasiswaController::class, 'maintenance'])->name('pengumuman-maintenance');
+            Route::get('/', [PengumumanMahasiswaController::class, 'index'])->name('pengumuman-mahasiswa-index');
+
+            Route::get('{id}/', [PengumumanMahasiswaController::class, 'show'])->name('pengumuman-mahasiswa-show');
+            Route::get('/mark-all-read', [PengumumanMahasiswaController::class, 'markAllRead'])->name('pengumuman-mahasiswa-mark-all-read');
+           
             // Route::get('/', [PengumumanMahasiswaController::class, 'maintenance'])->name('pengumuman-maintenance');
         });
     });

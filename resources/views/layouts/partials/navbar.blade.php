@@ -31,6 +31,8 @@
                             </div>
                         </li>
 
+                      
+
                         <!-- Nav Item - Alerts -->
                         <li class="nav-item dropdown no-arrow mx-1">
                             <!-- Dropdown - Alerts -->
@@ -73,6 +75,53 @@
                                     </div>
                                 </a>
                                 <a class="dropdown-item text-center small text-gray-500" href="#">Show All Alerts</a>
+                            </div>
+                        </li>
+
+                        <li class="nav-item dropdown no-arrow mx-1">
+                            <a class="nav-link dropdown-toggle" href="#" id="alertsDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                                <i class="fas fa-bell fa-fw text-gray-600"></i>
+                                {{-- Angka badge tetap hanya menghitung yang BELUM dibaca --}}
+                                @if(auth()->user()->unreadNotifications->count() > 0)
+                                    <span class="badge badge-danger badge-counter">
+                                        {{ auth()->user()->unreadNotifications->count() }}
+                                    </span>
+                                @endif
+                            </a>
+                            
+                            <div class="dropdown-list dropdown-menu dropdown-menu-right shadow animated--grow-in" aria-labelledby="alertsDropdown">
+                                <h6 class="dropdown-header bg-primary border-0 d-flex justify-content-between align-items-center">
+                                    Pusat Notifikasi
+                                    @if(auth()->user()->unreadNotifications->count() > 0)
+                                        <a href="{{ route('pengumuman-mahasiswa-mark-all-read') }}" class="text-white small" style="text-decoration: underline;">
+                                            Baca Semua
+                                        </a>
+                                    @endif
+                                </h6>
+                                
+                                {{-- Kita ambil 5 notifikasi TERBARU (baik sudah dibaca atau belum) --}}
+                                @forelse(auth()->user()->notifications()->take(5)->get() as $notification)
+                                    <a class="dropdown-item d-flex align-items-center {{ $notification->read_at == null ? 'bg-light' : '' }}" href="{{ route('pengumuman-mahasiswa-show', $notification->data['id']) }}">
+                                        <div class="mr-3">
+                                            {{-- Ganti warna icon kalau sudah dibaca biar ada bedanya --}}
+                                            <div class="icon-circle {{ $notification->read_at == null ? 'bg-primary' : 'bg-secondary' }} text-white">
+                                                <i class="fas fa-bullhorn"></i>
+                                            </div>
+                                        </div>
+                                        <div>
+                                            <div class="small {{ $notification->read_at == null ? 'text-primary font-weight-bold' : 'text-gray-500' }}">
+                                                {{ $notification->created_at->diffForHumans() }}
+                                            </div>
+                                            <span class="{{ $notification->read_at == null ? 'font-weight-bold text-dark' : 'text-gray-600' }}">
+                                                {{ $notification->data['judul'] }}
+                                            </span>
+                                        </div>
+                                    </a>
+                                @empty
+                                    <a class="dropdown-item text-center small text-gray-500" href="#">Tidak ada riwayat pengumuman</a>
+                                @endforelse
+                                
+                                <a class="dropdown-item text-center small text-gray-500" href="{{route('pengumuman-mahasiswa-index')}}">Lihat Semua Pengumuman</a>
                             </div>
                         </li>
 

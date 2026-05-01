@@ -4,8 +4,10 @@ namespace App\Http\Controllers\dosen;
 
 use App\Models\Pengumuman;
 use App\Models\User;
+use App\Notifications\PengumumanBaru;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\Notification;
 use Illuminate\Support\Facades\Storage;
 use Illuminate\Support\Str;
 
@@ -68,7 +70,13 @@ class PengumumanController extends Controller
             }
 
             // 3. Simpan ke Database
-            Pengumuman::create($data);
+            $pengumuman = Pengumuman::create($data);
+
+            if (in_array($request->target, ['0', '3'])) {
+            $mahasiswas = User::where('role_id', 3)->get();
+                Notification::send($mahasiswas, new PengumumanBaru($pengumuman));
+            }
+            
 
             // Arahkan kembali ke halaman index pengumuman
             return redirect()->route('pengumuman')->with('success', 'Pengumuman berhasil dipublikasikan!');
@@ -82,6 +90,23 @@ class PengumumanController extends Controller
             return back()->withInput()->with('error', 'Gagal menyimpan pengumuman: ' . $e->getMessage());
         }
     }
+
+    public function show($id)
+    {
+        // 1. Cari data pengumuman berdasarkan ID
+        // Jika tidak ketemu, otomatis lempar error 404
+        $pengumuman = Pengumuman::with('user')->findOrFail($id);
+
+        $data = [
+            'title'            => 'Detail Pengumuman',
+            'activePengumuman' => 'active',
+            'item'             => $pengumuman, // Kita pakai variabel 'item' agar sinkron dengan file Blade detail sebelumnya
+        ];
+
+        // 2. Arahkan ke file view detail
+        // Pastikan Mas sudah buat file: resources/views/dosen/pengumuman/show.blade.php
+        return view('dosen.pengumuman.show', $data);
+    }   
 
     public function edit($id)
     {
