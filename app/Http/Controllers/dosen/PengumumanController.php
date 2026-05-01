@@ -42,7 +42,7 @@ class PengumumanController extends Controller
             'judul'     => 'required|string|max:255',
             'isi'       => 'required|string',
             'target'    => 'required|string',
-            'file'      => 'nullable|mimes:pdf,jpg,jpeg,png|max:2048', // Maks 2MB
+            'file'      => 'nullable|mimes:pdf,jpg,jpeg,png,ppt,pptx,doc,docx,xls,xlsx|max:5120',
             'is_urgent' => 'nullable|boolean',
         ], [
             'judul.required' => 'Judul pengumuman wajib diisi.',
@@ -77,7 +77,6 @@ class PengumumanController extends Controller
                 Notification::send($mahasiswas, new PengumumanBaru($pengumuman));
             }
             
-
             // Arahkan kembali ke halaman index pengumuman
             return redirect()->route('pengumuman')->with('success', 'Pengumuman berhasil dipublikasikan!');
 
