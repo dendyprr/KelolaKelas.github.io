@@ -28,7 +28,6 @@ class PengumumanController extends Controller
     {
         $data = [
             'title'                    => 'Tambah Pengumuman',
-            // 'roles'                    => \DB::table('users')->select('master_role')->distinct()->get(),
             'roles'                    => User::with('role')->distinct()->get(),
             'pengumumans'              => Pengumuman::all(),
         ];
@@ -63,7 +62,6 @@ class PengumumanController extends Controller
                 // Buat nama file unik: timestamp_nama-asli.ekstensi
                 $filename = time() . '_' . Str::slug(pathinfo($file->getClientOriginalName(), PATHINFO_FILENAME)) . '.' . $file->getClientOriginalExtension();
                 
-                // Simpan ke folder: storage/app/public/pengumuman
                 $path = $file->storeAs('pengumuman', $filename, 'public');
                 
                 $data['file'] = $filename;
