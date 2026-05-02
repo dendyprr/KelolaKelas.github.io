@@ -43,7 +43,7 @@
             </a>
         </li>
 
-        <li class="nav-item {{ $activeRekapNilai ?? '' }}">
+        {{-- <li class="nav-item {{ $activeRekapNilai ?? '' }}">
             <a class="nav-link" href="{{ route('rekap-nilai-maintenance') }}">
                 <i class="fas fa-fw fa-graduation-cap"></i>
                 <span>Rekap Nilai</span>
@@ -55,7 +55,7 @@
                 <i class="fas fa-fw fa-book-open"></i>
                 <span>Tugas Dan Materi</span>
             </a>
-        </li>
+        </li> --}}
 
         <hr class="sidebar-divider">
         <div class="sidebar-heading">Informasi & Laporan</div>

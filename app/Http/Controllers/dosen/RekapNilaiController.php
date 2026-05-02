@@ -15,8 +15,6 @@ class RekapNilaiController extends Controller
         $kelas = Kelas::findOrFail($kelas_id);
         $activeManagemen =  'active';
         
-        // Ambil mahasiswa yang mengambil kelas ini
-        // Kita gunakan 'with' agar tidak berat saat meload absensi untuk hitung rata-rata
         $mahasiswas = Mahasiswa::whereHas('kelas', function($q) use ($kelas_id) {
             $q->where('kelas_id', $kelas_id);
         })->with(['absensis' => function($q) use ($kelas_id) {

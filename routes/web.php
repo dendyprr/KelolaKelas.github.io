@@ -49,6 +49,7 @@ Route::middleware('cekLogin')->group(function() {
         
         Route::prefix('laporan-presensi')->group(function () {
             Route::get('/', [LaporanPresensiController::class, 'index'])->name('laporan-presensi');
+            Route::get('/reset', [LaporanPresensiController::class, 'resetFilter'])->name('reset-laporan-presensi');
         });
 
         Route::prefix('tugas-materi')->group(function () {
