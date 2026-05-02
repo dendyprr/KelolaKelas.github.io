@@ -31,8 +31,6 @@
                             </div>
                         </li>
 
-                      
-
                         <!-- Nav Item - Alerts -->
                         <li class="nav-item dropdown no-arrow mx-1">
                             <!-- Dropdown - Alerts -->

@@ -14,6 +14,7 @@ class Mahasiswa extends Model
         'kelas_id',
         'jurusan',
         'angkatan',
+        'jenis_kelamin'
     ];
     public function user()
     {

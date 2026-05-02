@@ -113,10 +113,10 @@
                                 <td>{{ $mhs->user->phone }}</td>
                                 <td>{{ $mhs->user->email ?? '-' }}</td>
                                 <td class="text-center align-middle">
-                                    @if ($mhs->jenis_kelamin === 'L')
+                                    @if ($mhs->user->jenis_kelamin == 'L')
                                         <span class="badge badge-info px-2">Laki-laki</span>
                                     @else
-                                        <span class="badge badge-danger px-2">Perempuan</span>
+                                        <span class="badge badge-success px-2">Perempuan</span>
                                     @endif
                                 </td>
                                 <td class="align-middle">

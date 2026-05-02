@@ -43,8 +43,8 @@
                             <div class="form-group">
                                 <label class="font-weight-bold small">Jenis Kelamin</label>
                                 <select name="jenis_kelamin" class="form-control" required>
-                                    <option value="L" {{ $mhs->jenis_kelamin == 'L' ? 'selected' : '' }}>Laki-laki</option>
-                                    <option value="P" {{ $mhs->jenis_kelamin == 'P' ? 'selected' : '' }}>Perempuan</option>
+                                    <option value="L" {{ $mhs->user->jenis_kelamin == 'L' ? 'selected' : '' }}>Laki-laki</option>
+                                    <option value="P" {{ $mhs->user->jenis_kelamin == 'P' ? 'selected' : '' }}>Perempuan</option>
                                 </select>
                             </div>
                         </div>

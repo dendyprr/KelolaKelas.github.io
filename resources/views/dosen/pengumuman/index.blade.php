@@ -89,9 +89,8 @@
                                         @if($item->is_urgent) 
                                             <i class="fas fa-exclamation-circle text-danger mr-1 animate-pulse" title="Penting!"></i> 
                                         @endif
-                                        {{ $item->judul }}
+                                        <a href="{{route('pengumuman.edit', $item->id)}}">{{ $item->judul }}</a>
                                     </div>
-                                    {{-- <small class="text-muted">Oleh: {{ $item->user->nama ?? 'Admin' }}</small> --}}
                                 </td>
                                 <td class="text-center align-middle">
                                     @if($item->target == 1)

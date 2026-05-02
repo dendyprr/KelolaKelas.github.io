@@ -116,7 +116,7 @@ class AnggotaGroupController extends Controller
 
     public function editProccess(Request $request, $id)
     {
-        // dd($request->all());
+       
         $request->validate([
             'nim'               => 'nullable',
             'nama'              => 'nullable',
@@ -139,11 +139,16 @@ class AnggotaGroupController extends Controller
                 'jenis_kelamin' => $request->jenis_kelamin,
             ]);
 
+            // dd($user->getChanges());
+
+            
             // Update data Mahasiswa (Tanpa IF role_id agar lebih pasti jalan)
             $mahasiswa->update([
                 'nim'       => $request->nim,
                 'angkatan'  => $request->angkatan,
             ]);
+
+            // dd($mahasiswa);
             DB::commit();
             return redirect()->route('anggota-group-index', $mahasiswa->kelas_id)
             ->with('success', 'Data berhasil diubah');

@@ -55,8 +55,11 @@
                             <div class="form-group mb-3">
                                 <label class="font-weight-bold small">Lampiran File (PDF/Gambar)</label>
                                 <div class="custom-file">
-                                    <input type="file" name="file" class="custom-file-input" id="filePengumuman">
+                                    <input type="file" name="file" class="custom-file-input @error('file') is-invalid @enderror" id="filePengumuman">
                                     <label class="custom-file-label" for="filePengumuman">Pilih file...</label>
+                                    @error('file')
+                                        <small class="text-danger font-weight-bold">{{ $message }}</small>
+                                    @enderror
                                 </div>
                                 <small class="text-muted small d-block mt-1">Format: PDF, JPG, PNG (Maks 2MB)</small>
                             </div>

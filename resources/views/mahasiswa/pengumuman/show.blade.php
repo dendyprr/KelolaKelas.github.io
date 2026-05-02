@@ -19,6 +19,8 @@
                 <div class="card-header py-3 d-flex flex-row align-items-center justify-content-between bg-white">
                     <h6 class="m-0 font-weight-bold text-primary">
                         <i class="fas fa-bullhorn mr-2"></i>Informasi Akademik
+                        <small class="text-muted mr-3"><i class="fas fa-calendar-alt mr-1"></i> {{ $item->created_at->timezone('Asia/Jakarta')->format('d M Y') }}</small>
+                        <small class="text-muted"><i class="fas fa-clock mr-1"></i> {{ $item->created_at->timezone('Asia/Jakarta')->format('H:i') }} WIB</small>
                     </h6>
                     @if($item->is_urgent)
                         <span class="badge badge-danger px-3 py-2">PENTING</span>
@@ -27,8 +29,7 @@
                 <div class="card-body text-dark">
                     <h4 class="font-weight-bold mb-3">{{ $item->judul }}</h4>
                     <div class="mb-3">
-                        <small class="text-muted mr-3"><i class="fas fa-calendar-alt mr-1"></i> {{ $item->created_at->format('d M Y') }}</small>
-                        <small class="text-muted"><i class="fas fa-clock mr-1"></i> {{ $item->created_at->format('H:i') }} WIB</small>
+
                     </div>
                     <hr>
                     <div class="isi-pengumuman" style="line-height: 1.8; white-space: pre-line; font-size: 1.1rem;">
