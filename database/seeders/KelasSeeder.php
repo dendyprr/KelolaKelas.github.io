@@ -13,6 +13,7 @@ class KelasSeeder extends Seeder
             // 5 Data Tahun 2024 - Periode Ganjil
             [
                 'kode_kelas' => '20241-INF01',
+                'user_id' => 1,
                 'nama_matakuliah' => 'Pemrograman Web Lanjut',
                 'jumlah_sks' => '3',
                 'periode' => 'Ganjil',
@@ -27,6 +28,7 @@ class KelasSeeder extends Seeder
             ],
             [
                 'kode_kelas' => '20241-INF02',
+                'user_id' => 1,
                 'nama_matakuliah' => 'Basis Data Terstruktur',
                 'jumlah_sks' => '3',
                 'periode' => 'Ganjil',
@@ -41,6 +43,7 @@ class KelasSeeder extends Seeder
             ],
             [
                 'kode_kelas' => '20241-INF03',
+                'user_id' => 1,
                 'nama_matakuliah' => 'Struktur Data',
                 'jumlah_sks' => '4',
                 'periode' => 'Ganjil',
@@ -55,6 +58,7 @@ class KelasSeeder extends Seeder
             ],
             [
                 'kode_kelas' => '20241-INF04',
+                'user_id' => 1,
                 'nama_matakuliah' => 'Kecerdasan Buatan',
                 'jumlah_sks' => '3',
                 'periode' => 'Ganjil',
@@ -69,6 +73,7 @@ class KelasSeeder extends Seeder
             ],
             [
                 'kode_kelas' => '20241-INF05',
+                'user_id' => 1,
                 'nama_matakuliah' => 'Jaringan Komputer',
                 'jumlah_sks' => '3',
                 'periode' => 'Ganjil',
@@ -85,10 +90,11 @@ class KelasSeeder extends Seeder
             // 5 Data Tahun 2023 - Periode Genap
             [
                 'kode_kelas' => '20232-INF01',
+                'user_id' => 1,
                 'nama_matakuliah' => 'Algoritma & Pemrograman',
                 'jumlah_sks' => '4',
                 'periode' => 'Genap',
-                'tahun_ajaran' => '2023',
+                'tahun_ajaran' => '2025',
                 'semester' => '2',
                 'hari' => 'Senin',
                 'jam_mulai' => '08:00:00',
@@ -99,10 +105,11 @@ class KelasSeeder extends Seeder
             ],
             [
                 'kode_kelas' => '20232-INF02',
+                'user_id' => 1,
                 'nama_matakuliah' => 'Interaksi Manusia & Komputer',
                 'jumlah_sks' => '2',
                 'periode' => 'Genap',
-                'tahun_ajaran' => '2023',
+                'tahun_ajaran' => '2025',
                 'semester' => '4',
                 'hari' => 'Selasa',
                 'jam_mulai' => '08:00:00',
@@ -113,10 +120,11 @@ class KelasSeeder extends Seeder
             ],
             [
                 'kode_kelas' => '20232-INF03',
+                'user_id' => 1,
                 'nama_matakuliah' => 'Sistem Operasi',
                 'jumlah_sks' => '3',
                 'periode' => 'Genap',
-                'tahun_ajaran' => '2023',
+                'tahun_ajaran' => '2025',
                 'semester' => '4',
                 'hari' => 'Rabu',
                 'jam_mulai' => '13:00:00',
@@ -127,10 +135,11 @@ class KelasSeeder extends Seeder
             ],
             [
                 'kode_kelas' => '20232-INF04',
+                'user_id' => 1,
                 'nama_matakuliah' => 'Etika Profesi',
                 'jumlah_sks' => '2',
                 'periode' => 'Genap',
-                'tahun_ajaran' => '2023',
+                'tahun_ajaran' => '2025',
                 'semester' => '6',
                 'hari' => 'Kamis',
                 'jam_mulai' => '08:00:00',
@@ -141,10 +150,11 @@ class KelasSeeder extends Seeder
             ],
             [
                 'kode_kelas' => '20232-INF05',
+                'user_id' => 1,
                 'nama_matakuliah' => 'Mobile Programming',
                 'jumlah_sks' => '3',
                 'periode' => 'Genap',
-                'tahun_ajaran' => '2023',
+                'tahun_ajaran' => '2025',
                 'semester' => '6',
                 'hari' => 'Jumat',
                 'jam_mulai' => '13:30:00',

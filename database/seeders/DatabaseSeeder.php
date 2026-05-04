@@ -14,9 +14,9 @@ class DatabaseSeeder extends Seeder
         // User::factory(10)->create();
 
         $this->call([
-            MasterRoleSeeder::class,
-            KelasSeeder::class,
-            UserSeeder::class,
+            MasterRoleSeeder::class,      // 1. Siapin list perannya (Admin, Dosen, Mhs)
+            UserSeeder::class,            // 2. Siapin orangnya (Nempel ke Role)
+            KelasSeeder::class,           // 3. Siapin ruangannya (Dosen nempel ke Kelas)
             KelasMahasiswaSeeder::class
         ]);
 

@@ -46,6 +46,12 @@ class User extends Authenticatable
         // Satu user bisa membuat banyak pengumuman
         return $this->hasMany(Pengumuman::class);
     }
+
+    public function jadwalMengajar()
+    {
+        // Satu User (Dosen) memiliki banyak Kelas
+        return $this->hasMany(Kelas::class, 'user_id');
+    }
     
     protected function casts(): array
     {

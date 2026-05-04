@@ -14,8 +14,8 @@ class MasterRoleSeeder extends Seeder
     public function run(): void
     {
         $roles = [
-            ['id' => 1, 'nama' => 'Admin'],
-            ['id' => 2, 'nama' => 'Dosen'],
+            ['id' => 1, 'nama' => 'Dosen'],
+            ['id' => 2, 'nama' => 'Admin'],
             ['id' => 3, 'nama' => 'Mahasiswa'],
         ];
 

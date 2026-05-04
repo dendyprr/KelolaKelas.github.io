@@ -5,12 +5,56 @@ namespace App\Http\Controllers\dosen;
 use App\Http\Requests\JadwalRequest;
 use App\Models\jadwalNgajar;
 use App\Models\Kelas;
+use Carbon\Carbon;
 use Illuminate\Http\Request;
 
 class JadwalNgajarController extends Controller
 {
+    public function index()
+    {
+        Carbon::setLocale('id');
+        $now = Carbon::now();
+        $bulan = $now->month;
+
+        if ($bulan >= 2 && $bulan <= 8) {
+            $periodeAktif = 'Ganjil';
+        } else {
+            // Ini mencakup bulan 9, 10, 11, 12 dan bulan 1
+            $periodeAktif = 'Genap';
+        }
+
+        $hariIni = Carbon::now()->translatedFormat('l');
+        $besok = Carbon::tomorrow()->translatedFormat('l'); 
+        $tahunSekarang = $now->year;
+        $bulan = $now->month;
+  
+        $data = [
+            'title'                      => 'Jadwal Ngajar',
+            'activeJadwal'               => 'active',
+            'hariIni'                    => $hariIni,
+            'besok'                      => $besok,
+            'periodeAktif'               => $periodeAktif,
+            'tahunSekarang'              => $tahunSekarang,
+            'jadwalHariIni'              => Kelas::where('user_id', auth()->id()) 
+                                            ->where('hari', $hariIni)
+                                            ->where('periode', $periodeAktif)
+                                            ->where('tahun_ajaran', $tahunSekarang)
+                                            ->orderBy('jam_mulai', 'asc')
+                                            ->get(),       
+            'jadwalBesok'               => Kelas::where('user_id', auth()->id())
+                                            ->where('hari', $besok)
+                                            ->where('periode', $periodeAktif)
+                                            ->where('tahun_ajaran', $tahunSekarang)
+                                            ->orderBy('jam_mulai', 'asc')
+                                            ->get(),
+        ];
+    
+
+        return view('dosen.jadwal.index', $data);
+        
+    }
    
-    public function index(Request $request)
+    public function maintenance(Request $request)
     {
         $query = Kelas::query();
 
