@@ -113,112 +113,129 @@
             </div>       
             <div class="card-body">
                 <div class="tab-content" id="pills-tabContent">
+                    {{-- TAB HARI INI --}}
                     <div class="tab-pane fade show active" id="hari-ini" role="tabpanel">
                         <div class="table-responsive">
-                            <table class="table table-hover border-bottom text-center m-0">
-                                <thead class="bg-light">
-                                    <tr class="text-muted small text-uppercase">
-                                        <th width="50">No</th>
-                                        <th style="width: 25%">Jam</th>
+                            <table class="table table-borderless table-hover border-bottom m-0">
+                                <thead class="bg-light text-dark">
+                                    <tr class="small text-uppercase font-weight-bold">
+                                        <th class="text-center" width="50">No</th>
+                                        <th style="width: 20%">Jam</th>
                                         <th>Mata Kuliah</th>
-                                        <th>Semester</th>
-                                        <th>Ruang</th>
+                                        <th class="text-center">Smt</th>
+                                        <th class="text-center">Ruang</th>
                                         <th class="text-center">Status</th>
                                     </tr>
                                 </thead>
                                 <tbody>
                                     @forelse($pertemuanHariIni as $p)
-                                    <tr>
-                                        <td class="align-middle">
-                                            <span class="badge badge-light border">{{ $loop->iteration }}</span>
-                                        </td>
-                                        <td class="align-middle">
-                                            <strong class="text-primary">
-                                                {{ date('H:i', strtotime($p->kelas->jam_mulai)) }} - {{ date('H:i', strtotime($p->kelas->jam_selesai)) }}
-                                            </strong>
-                                        </td>
-                                        <td class="align-middle">
-                                            <div class="text-dark font-weight-bold">{{ $p->kelas->nama_matakuliah ?? 'N/A' }}</div>
-                                            <small class="text-muted text-uppercase">PERTEMUAN KE-{{ $p->pertemuan_ke }}</small>
-                                        </td>
-                                        <td class="align-middle">
-                                            <span class="badge badge-light border">{{ $p->kelas->semester ?? '-' }}</span>
-                                        </td>
-                                        <td class="align-middle">
-                                            <span class="badge badge-light border">{{ $p->kelas->kode_kelas ?? '-' }}</span>
-                                        </td>
-                                        <td class="align-middle text-center">
-                                            @php
-                                                $sekarang = date('H:i:s');
-                                                $jamMulai = $p->kelas->jam_mulai;
-                                                $jamSelesai = $p->kelas->jam_selesai;
-                                            @endphp
-                                            
-                                            @if($sekarang > $jamSelesai)
-                                                <span class="badge badge-success text-white px-3">Selesai</span>
-                                            @elseif($sekarang >= $jamMulai && $sekarang <= $jamSelesai)
-                                                <span class="badge badge-warning text-white pulse px-3">Berlangsung</span>
-                                            @else
-                                                <span class="badge badge-secondary text-white px-3">Belum Mulai</span>
-                                            @endif
-                                        </td>
-                                    </tr>
+                                        @php
+                                            $sekarang = date('H:i:s');
+                                            $jamMulai = $p->jam_mulai;
+                                            $jamSelesai = $p->jam_selesai;
+
+                                            if ($sekarang > $jamSelesai) {
+                                                $statusLabel = 'Selesai';
+                                                $statusColor = 'success';
+                                                $isPulse = '';
+                                            } elseif ($sekarang >= $jamMulai && $sekarang <= $jamSelesai) {
+                                                $statusLabel = 'Berlangsung';
+                                                $statusColor = 'warning';
+                                                $isPulse = 'animate-pulse';
+                                            } else {
+                                                $statusLabel = 'Belum Mulai';
+                                                $statusColor = 'secondary';
+                                                $isPulse = '';
+                                            }
+                                        @endphp
+                                        <tr>
+                                            <td class="align-middle text-center">
+                                                <span class="text-muted small">{{ $loop->iteration }}</span>
+                                            </td>
+                                            <td class="align-middle">
+                                                <div class="badge badge-primary-soft text-primary p-2 w-100" style="background-color: #eef2ff;">
+                                                    <i class="far fa-clock mr-1"></i>
+                                                    {{ date('H:i', strtotime($jamMulai)) }} - {{ date('H:i', strtotime($jamSelesai)) }}
+                                                </div>
+                                            </td>
+                                            <td class="align-middle">
+                                                <div class="text-dark font-weight-bold mb-0">{{ $p->nama_matakuliah }}</div>
+                                                <div class="text-xs text-muted text-uppercase tracking-wider">Kode: {{ $p->kode_kelas }}</div>
+                                            </td>
+                                            <td class="align-middle text-center">
+                                                <span class="badge badge-light border px-2 py-1">{{ $p->semester }}</span>
+                                            </td>
+                                            <td class="align-middle text-center">
+                                                <span class="badge badge-light border px-2 py-1"><i class="fas fa-door-open mr-1 text-muted"></i>{{ $p->ruangan ?? '-' }}</span>
+                                            </td>
+                                            <td class="align-middle text-center">
+                                                <span class="badge badge-{{ $statusColor }} {{ $isPulse }} px-3 py-2 shadow-sm" style="font-size: 0.7rem; border-radius: 50px;">
+                                                    <i class="fas {{ $statusColor == 'warning' ? 'fa-spinner fa-spin' : ($statusColor == 'success' ? 'fa-check-circle' : 'fa-clock') }} mr-1"></i>
+                                                    {{ $statusLabel }}
+                                                </span>
+                                            </td>
+                                        </tr>
                                     @empty
-                                    <tr>
-                                        <td colspan="6" class="text-center py-5 text-muted">
-                                            <i class="fas fa-calendar-times fa-3x mb-3 d-inline-block"></i>
-                                            <p class="mb-0 font-weight-bold">Tidak ada jadwal pertemuan untuk hari ini.</p>
-                                        </td>
-                                    </tr>
+                                        <tr>
+                                            <td colspan="6" class="text-center py-5">
+                                                <div class="text-gray-300 mb-3"><i class="fas fa-calendar-times fa-4x"></i></div>
+                                                <h6 class="text-gray-500 font-weight-bold">Tidak ada jadwal mengajar hari ini.</h6>
+                                                <p class="text-gray-400 small">Nikmati waktu istirahat Anda!</p>
+                                            </td>
+                                        </tr>
                                     @endforelse
                                 </tbody>
                             </table>
                         </div>
                     </div>
 
+                    {{-- TAB BESOK --}}
                     <div class="tab-pane fade" id="besok" role="tabpanel">
                         <div class="table-responsive">
-                            <table class="table table-hover border-bottom text-center">
-                                <thead class="bg-light">
-                                    <tr class="text-muted small text-uppercase">
-                                        <th>No</th>
-                                        <th style="width: 25%">Jam</th>
+                            <table class="table table-borderless table-hover border-bottom m-0">
+                                <thead class="bg-light text-dark">
+                                    <tr class="small text-uppercase font-weight-bold">
+                                        <th class="text-center" width="50">No</th>
+                                        <th style="width: 20%">Jam</th>
                                         <th>Mata Kuliah</th>
-                                        <th>Semester</th>
-                                        <th>Ruang</th>
-                                        <th class="text-center">Status</th>
+                                        <th class="text-center">Smt</th>
+                                        <th class="text-center">Ruang</th>
+                                        <th class="text-center">Aksi</th>
                                     </tr>
                                 </thead>
                                 <tbody>
                                     @forelse($pertemuanBesok as $pb)
-                                    <tr class="text-center">
-                                        <td class="align-middle">
-                                            <span class="badge badge-light border">{{ $loop->iteration }}</span>
-                                        </td>
-                                        <td class="align-middle">
-                                            <strong class="text-dark">{{ date('H:i', strtotime($pb->kelas->jam_mulai)) }} - {{ date('H:i', strtotime($pb->kelas->jam_selesai)) }}</strong>
-                                        </td>
-                                        <td class="align-middle">
-                                            <div class="text-dark font-weight-bold">{{ $pb->kelas->nama_matakuliah }}</div>
-                                            <small class="text-muted">PERTEMUAN KE-{{ $pb->pertemuan_ke }}</small>
-                                        </td>
-                                        <td class="align-middle">
-                                            <span class="badge badge-light border">{{ $p->kelas->semester ?? '-' }}</span>
-                                        </td>
-                                        <td class="align-middle">
-                                            <span class="badge badge-light border">{{ $pb->kelas->kode_kelas }}</span>
-                                        </td>
-                                        <td class="align-middle text-center">
-                                            <span class="badge badge-info text-white px-3">Besok</span>
-                                        </td>
-                                    </tr>
+                                        <tr>
+                                            <td class="align-middle text-center">
+                                                <span class="text-muted small">{{ $loop->iteration }}</span>
+                                            </td>
+                                            <td class="align-middle">
+                                                <div class="badge badge-info-soft text-info p-2 w-100" style="background-color: #e0f7fa;">
+                                                    <i class="far fa-clock mr-1"></i>
+                                                    {{ date('H:i', strtotime($pb->jam_mulai)) }} - {{ date('H:i', strtotime($pb->jam_selesai)) }}
+                                                </div>
+                                            </td>
+                                            <td class="align-middle">
+                                                <div class="text-dark font-weight-bold mb-0">{{ $pb->nama_matakuliah }}</div>
+                                                <div class="text-xs text-muted text-uppercase tracking-wider">Kode: {{ $pb->kode_kelas }}</div>
+                                            </td>
+                                            <td class="align-middle text-center">
+                                                <span class="badge badge-light border px-2 py-1">{{ $pb->semester }}</span>
+                                            </td>
+                                            <td class="align-middle text-center">
+                                                <span class="badge badge-light border px-2 py-1">{{ $pb->ruangan ?? '-' }}</span>
+                                            </td>
+                                            <td class="align-middle text-center">
+                                                <span class="badge badge-info shadow-sm px-3 py-2" style="font-size: 0.7rem; border-radius: 50px;">
+                                                    <i class="fas fa-calendar-alt mr-1"></i> Persiapkan
+                                                </span>
+                                            </td>
+                                        </tr>
                                     @empty
                                         <tr>
-                                            {{-- Ubah colspan menjadi 6 agar sesuai dengan jumlah kolom di header --}}
-                                            <td colspan="6" class="text-center py-5 text-muted">
-                                                {{-- Ikon otomatis ke tengah karena class text-center pada <td> --}}
-                                                <i class="fas fa-calendar-check fa-3x mb-3 d-inline-block"></i>
-                                                <p class="mb-0">Tidak ada jadwal pertemuan untuk besok.</p>
+                                            <td colspan="6" class="text-center py-5">
+                                                <div class="text-gray-300 mb-3"><i class="fas fa-mug-hot fa-4x"></i></div>
+                                                <h6 class="text-gray-500 font-weight-bold">Besok tidak ada jadwal mengajar.</h6>
                                             </td>
                                         </tr>
                                     @endforelse
@@ -315,5 +332,15 @@
     }
     .nav-pills .nav-link.active { background-color: #4e73df; color: #fff; }
     .nav-pills .nav-link { color: #4e73df; border: 1px solid #e3e6f0; margin-left: 5px; transition: 0.3s; }
+
+    .animate-pulse {
+        animation: pulse-yellow 2s infinite;
+    }
+    @keyframes pulse-yellow {
+        0% { transform: scale(1); box-shadow: 0 0 0 0 rgba(246, 194, 62, 0.7); }
+        70% { transform: scale(1.05); box-shadow: 0 0 0 10px rgba(246, 194, 62, 0); }
+        100% { transform: scale(1); box-shadow: 0 0 0 0 rgba(246, 194, 62, 0); }
+    }
+    .tracking-wider { letter-spacing: 0.05em; }
 </style>
 @endsection

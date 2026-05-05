@@ -15,16 +15,35 @@ class DashboardController extends Controller
     public function index()
     {
         Carbon::setLocale('id');
-        $hariIni = Carbon::today()->toDateString(); 
-        $hariBesok = Carbon::tomorrow()->toDateString(); 
-        
-        $pertemuanHariIni = Pertemuan::with('kelas') 
-        ->whereDate('tanggal', $hariIni)
-        ->get();
 
-        $pertemuanBesok = Pertemuan::with('kelas')
-        ->whereDate('tanggal', $hariBesok)
-        ->get();
+        $now = Carbon::now();
+        $bulan = $now->month;
+
+        if ($bulan >= 2 && $bulan <= 8) {
+            $periodeAktif = 'Ganjil';
+        } else {
+            // Ini mencakup bulan 9, 10, 11, 12 dan bulan 1
+            $periodeAktif = 'Genap';
+        }
+
+        $hariIni = Carbon::now()->translatedFormat('l');
+        $hariBesok = Carbon::tomorrow()->translatedFormat('l'); 
+        $tahunSekarang = $now->year;
+        $bulan = $now->month; 
+        
+        $pertemuanHariIni = Kelas::where('user_id', auth()->id()) 
+                                            ->where('hari', $hariIni)
+                                            ->where('periode', $periodeAktif)
+                                            ->where('tahun_ajaran', $tahunSekarang)
+                                            ->orderBy('jam_mulai', 'asc')
+                                            ->get();
+
+        $pertemuanBesok = Kelas::where('user_id', auth()->id())
+                                            ->where('hari', $hariBesok)
+                                            ->where('periode', $periodeAktif)
+                                            ->where('tahun_ajaran', $tahunSekarang)
+                                            ->orderBy('jam_mulai', 'asc')
+                                            ->get();
 
         $totalKelas = Kelas::count();
         $totalMahasiswa = User::where('role_id', 3)->count();
